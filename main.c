@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 struct stage {
-    char playground[0][0];
+    char **playground;
     int rows;
     int columns;
     char moves[0];
@@ -31,7 +31,7 @@ void show_stages() {
 
 }
 
-void get_labyrinth_size (const char *stage) {
+void load_labyrinth (const char *stage) {
     FILE* file = fopen("labyrinth.txt", "r");
 
     if(!file) {
@@ -62,6 +62,14 @@ void get_labyrinth_size (const char *stage) {
 
     current_stage.rows = rows;
     current_stage.columns = columns;
+
+    // ridimensiono la matrice in base al labirinto selezionato
+    current_stage.playground = malloc( sizeof *current_stage.playground *current_stage.rows);
+    if (current_stage.playground) {
+        for ( size_t i = 0; i < current_stage.rows; i++ ) {
+            current_stage.playground[i] = malloc( sizeof *current_stage.playground[i] * current_stage.columns);
+        }
+    }
 
     rewind(file);
     selected = false;
@@ -94,7 +102,22 @@ int main() {
         scanf("%c", &stage[0]);
     } while (stage[0] != '1' && stage[0] != '2');
 
-    get_labyrinth_size(stage);
+    load_labyrinth(stage);
+
+
+    for (int i = 0; i < current_stage.rows; i++) {
+        for (int j = 0; j < current_stage.columns; j++) {
+            current_stage.playground[i][j] = '0';
+        }
+    }
+
+    for (int i = 0; i < current_stage.rows; i++) {
+        for (int j = 0; j < current_stage.columns; j++) {
+            printf("%c", current_stage.playground[i][j]);
+        }
+        printf("\n");
+    }
+
     printf("righe: %d\ncolonne: %d\n", current_stage.rows, current_stage.columns);
 
     return 0;
