@@ -77,13 +77,17 @@ void load_labyrinth (const char *stage) {
     while (fgets(line, sizeof(line), file)) { // leggo tutto il file e stoppo il ciclo dopo aver letto il labirinto
         if ((strcmp(line, stage)) == 0) { // se trovo il numero corrispondente al labirinto comincio a leggerlo
             selected = true;
-            while ((c = fgetc(file)) != EOF){ // leggo il labirinto finchè non trovo end
-                if (c == 'e') {
-                    break;
+
+            // metto dentro alla matrice tutti gli elementi che non sono \n
+            for (int i = 0; i < current_stage.rows; i++) {
+                for (int j = 0; j < current_stage.columns; j++) {
+                    do {
+                        c = fgetc(file);
+                        current_stage.playground[i][j] = c;
+                    } while (c == '\n');
                 }
-                // mettere i valori dentro alla matrice
-                printf("%c", c);
             }
+
         }
         if (selected) {
             break;
@@ -103,13 +107,6 @@ int main() {
     } while (stage[0] != '1' && stage[0] != '2');
 
     load_labyrinth(stage);
-
-
-    for (int i = 0; i < current_stage.rows; i++) {
-        for (int j = 0; j < current_stage.columns; j++) {
-            current_stage.playground[i][j] = '0';
-        }
-    }
 
     for (int i = 0; i < current_stage.rows; i++) {
         for (int j = 0; j < current_stage.columns; j++) {
