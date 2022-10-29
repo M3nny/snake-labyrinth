@@ -9,26 +9,35 @@ struct stage {
     int columns;
     char moves[0];
 
-    int current_position[1][1];
+    int current_position[2];
+    bool won;
     int score;
 };
 struct stage current_stage;
 
-void show_stages() {
-    FILE* file = fopen("labyrinth.txt", "r");
+void show_stages(bool loaded) {
+    if (!loaded) {
+        FILE* file = fopen("labyrinth.txt", "r");
 
-    if(!file) {
-        printf("\n Unable to open file");
-        exit(EXIT_FAILURE);
+        if(!file) {
+            printf("\n Unable to open file");
+            exit(EXIT_FAILURE);
+        }
+
+        char line[50];
+
+        while (fgets(line, sizeof(line), file)) {
+            printf("%s", line);
+        }
+        fclose(file);
+    } else {
+        for (int i = 0; i < current_stage.rows; i++) {
+            for (int j = 0; j < current_stage.columns; j++) {
+                printf("%c", current_stage.playground[i][j]);
+            }
+            printf("\n");
+        }
     }
-
-    char line[50];
-
-    while (fgets(line, sizeof(line), file)) {
-        printf("%s", line);
-    }
-    fclose(file);
-
 }
 
 void load_labyrinth (const char *stage) {
@@ -84,6 +93,10 @@ void load_labyrinth (const char *stage) {
                     do {
                         c = fgetc(file);
                         current_stage.playground[i][j] = c;
+                        if (c == 'o') {
+                            current_stage.current_position[0] = i;
+                            current_stage.current_position[1] = j;
+                        }
                     } while (c == '\n');
                 }
             }
@@ -95,11 +108,16 @@ void load_labyrinth (const char *stage) {
     }
 }
 
+void clear () {
+    printf("\e[1;1H\e[2J");
+}
+
 int main() {
     char stage[2] = "x\n";
+    char move;
 
     printf("Benvenuto su snake labyrinth\n");
-    show_stages();
+    show_stages(false);
 
     do {
         printf("Seleziona una mappa (1 - 2)\n");
@@ -107,15 +125,102 @@ int main() {
     } while (stage[0] != '1' && stage[0] != '2');
 
     load_labyrinth(stage);
+    printf("\e[1;1H\e[2JMappa selezionata:\n");
+    show_stages(true);
 
-    for (int i = 0; i < current_stage.rows; i++) {
-        for (int j = 0; j < current_stage.columns; j++) {
-            printf("%c", current_stage.playground[i][j]);
-        }
-        printf("\n");
-    }
+    do {
+        do {
+            printf("Inserisci la tua mossa (h - j - k - l)\n");
+            scanf(" %c", &move);
+            switch (move) {
+                case 'h':
+                    if (current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]-1] != '#') {
+                        if (current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]-1] == '_') {
+                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]] = ' ';
+                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]-1] = 'o';
+                            current_stage.current_position[1] = current_stage.current_position[1]-1;
+                            clear();
+                            show_stages(true);
+                            printf("hai vinto\n");
+                            current_stage.won = true;
+                        } else {
+                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]] = ' ';
+                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]-1] = 'o';
+                            current_stage.current_position[1] = current_stage.current_position[1]-1;
+                            clear();
+                            show_stages(true);
+                        }
+                    } else {
+                        printf("mossa non valida");
+                    }
+                    break;
+                case 'j':
+                    if (current_stage.playground[current_stage.current_position[0]+1][current_stage.current_position[1]] != '#') {
+                        if (current_stage.playground[current_stage.current_position[0]+1][current_stage.current_position[1]] == '_') {
+                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]] = ' ';
+                            current_stage.playground[current_stage.current_position[0]+1][current_stage.current_position[1]] = 'o';
+                            current_stage.current_position[0] = current_stage.current_position[0]+1;
+                            clear();
+                            show_stages(true);
+                            printf("hai vinto\n");
+                            current_stage.won = true;
+                        } else {
+                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]] = ' ';
+                            current_stage.playground[current_stage.current_position[0]+1][current_stage.current_position[1]] = 'o';
+                            current_stage.current_position[0] = current_stage.current_position[0]+1;
+                            clear();
+                            show_stages(true);
+                        }
+                    } else {
+                        printf("mossa non valida");
+                    }
+                    break;
+                case 'k':
+                    if (current_stage.playground[current_stage.current_position[0]-1][current_stage.current_position[1]] != '#') {
+                        if (current_stage.playground[current_stage.current_position[0]-1][current_stage.current_position[1]] == '_') {
+                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]] = ' ';
+                            current_stage.playground[current_stage.current_position[0]-1][current_stage.current_position[1]] = 'o';
+                            current_stage.current_position[0] = current_stage.current_position[0]-1;
+                            clear();
+                            show_stages(true);
+                            printf("hai vinto\n");
+                            current_stage.won = true;
+                        } else {
+                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]] = ' ';
+                            current_stage.playground[current_stage.current_position[0]-1][current_stage.current_position[1]] = 'o';
+                            current_stage.current_position[0] = current_stage.current_position[0]-1;
+                            clear();
+                            show_stages(true);
+                        }
+                    } else {
+                        printf("mossa non valida");
+                    }
 
-    printf("righe: %d\ncolonne: %d\n", current_stage.rows, current_stage.columns);
+                    break;
+                case 'l':
+                    if (current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]+1] != '#') {
+                        if (current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]+1] == '_') {
+                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]] = ' ';
+                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]+1] = 'o';
+                            current_stage.current_position[1] = current_stage.current_position[1]+1;
+                            clear();
+                            show_stages(true);
+                            printf("hai vinto\n");
+                            current_stage.won = true;
+                        } else {
+                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]] = ' ';
+                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]+1] = 'o';
+                            current_stage.current_position[1] = current_stage.current_position[1]+1;
+                            clear();
+                            show_stages(true);
+                        }
+                    } else {
+                        printf("mossa non valida");
+                    }
+                    break;
+            }
+        } while (move != 'h' && move != 'j' && move != 'k' && move != 'l');
+    } while (!current_stage.won);
 
     return 0;
 }
