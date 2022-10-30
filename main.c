@@ -7,9 +7,9 @@ struct stage {
     char **playground;
     int rows;
     int columns;
-    char moves[0];
+    char directions[0];
 
-    int current_position[2];
+    int position[2];
     bool won;
     int score;
 };
@@ -94,8 +94,8 @@ void load_labyrinth (const char *stage) {
                         c = fgetc(file);
                         current_stage.playground[i][j] = c;
                         if (c == 'o') {
-                            current_stage.current_position[0] = i;
-                            current_stage.current_position[1] = j;
+                            current_stage.position[0] = i;
+                            current_stage.position[1] = j;
                         }
                     } while (c == '\n');
                 }
@@ -112,9 +112,170 @@ void clear () {
     printf("\e[1;1H\e[2J");
 }
 
+void move (char direction) {
+    char next_position;
+    bool scored = false;
+    switch (direction) {
+        case 'h':
+            next_position = current_stage.playground[current_stage.position[0]][current_stage.position[1]-1];
+
+            if (next_position != '#' && next_position == '_') {
+                current_stage.playground[current_stage.position[0]][current_stage.position[1]] = ' ';
+                current_stage.playground[current_stage.position[0]][current_stage.position[1]-1] = 'o';
+                current_stage.position[1] = current_stage.position[1]-1;
+
+                current_stage.score--;
+
+                clear();
+                show_stages(true);
+                printf("hai vinto\n");
+                current_stage.won = true;
+            } else if (next_position != '#') {
+                if (next_position == '$') {
+                    current_stage.score += 3;
+                    scored = true;
+                }
+                if (next_position == '!') {
+                    current_stage.score /= 2;
+                    scored = true;
+                }
+                current_stage.playground[current_stage.position[0]][current_stage.position[1]] = ' ';
+                current_stage.playground[current_stage.position[0]][current_stage.position[1]-1] = 'o';
+                current_stage.position[1] = current_stage.position[1]-1;
+
+                if (!scored) {
+                    current_stage.score--;
+                }
+
+                clear();
+                show_stages(true);
+            }
+            else {
+                printf("mossa non valida\n");
+            }
+            break;
+        case 'j':
+            next_position = current_stage.playground[current_stage.position[0]+1][current_stage.position[1]];
+
+            if (next_position != '#' && next_position == '_') {
+                current_stage.playground[current_stage.position[0]][current_stage.position[1]] = ' ';
+                current_stage.playground[current_stage.position[0]+1][current_stage.position[1]] = 'o';
+                current_stage.position[0] = current_stage.position[0]+1;
+
+                current_stage.score--;
+
+                clear();
+                show_stages(true);
+                printf("hai vinto\n");
+                current_stage.won = true;
+            } else if (next_position != '#'){
+                if (next_position == '$') {
+                    current_stage.score += 3;
+                    scored = true;
+                }
+                if (next_position == '!') {
+                    current_stage.score /= 2;
+                    scored = true;
+                }
+                current_stage.playground[current_stage.position[0]][current_stage.position[1]] = ' ';
+                current_stage.playground[current_stage.position[0]+1][current_stage.position[1]] = 'o';
+                current_stage.position[0] = current_stage.position[0]+1;
+
+                if (!scored) {
+                    current_stage.score--;
+                }
+
+                clear();
+                show_stages(true);
+            }
+            else {
+                printf("mossa non valida\n");
+            }
+            break;
+        case 'k':
+            next_position = current_stage.playground[current_stage.position[0]-1][current_stage.position[1]];
+            if (next_position != '#' && next_position == '_') {
+                current_stage.playground[current_stage.position[0]][current_stage.position[1]] = ' ';
+                current_stage.playground[current_stage.position[0]-1][current_stage.position[1]] = 'o';
+                current_stage.position[0] = current_stage.position[0]-1;
+
+                current_stage.score--;
+
+                clear();
+                show_stages(true);
+                printf("hai vinto\n");
+                current_stage.won = true;
+            } else if (next_position != '#'){
+                if (next_position == '$') {
+                    current_stage.score += 3;
+                    scored = true;
+                }
+                if (next_position == '!') {
+                    current_stage.score /= 2;
+                    scored = true;
+                }
+                current_stage.playground[current_stage.position[0]][current_stage.position[1]] = ' ';
+                current_stage.playground[current_stage.position[0]-1][current_stage.position[1]] = 'o';
+                current_stage.position[0] = current_stage.position[0]-1;
+
+                if (!scored) {
+                    current_stage.score--;
+                }
+
+                clear();
+                show_stages(true);
+            }
+            else {
+                printf("mossa non valida\n");
+            }
+
+            break;
+        case 'l':
+            next_position = current_stage.playground[current_stage.position[0]][current_stage.position[1]+1];
+            if (next_position != '#' && next_position == '_') {
+                current_stage.playground[current_stage.position[0]][current_stage.position[1]] = ' ';
+                current_stage.playground[current_stage.position[0]][current_stage.position[1]+1] = 'o';
+                current_stage.position[1] = current_stage.position[1]+1;
+
+                current_stage.score--;
+
+                clear();
+                show_stages(true);
+                printf("hai vinto\n");
+                current_stage.won = true;
+            } else if (next_position != '#'){
+                if (next_position == '$') {
+                    current_stage.score += 3;
+                    scored = true;
+                }
+                if (next_position == '!') {
+                    current_stage.score /= 2;
+                    scored = true;
+                }
+                current_stage.playground[current_stage.position[0]][current_stage.position[1]] = ' ';
+                current_stage.playground[current_stage.position[0]][current_stage.position[1]+1] = 'o';
+                current_stage.position[1] = current_stage.position[1]+1;
+
+                if (!scored) {
+                    current_stage.score--;
+                }
+
+                clear();
+                show_stages(true);
+            }
+            else {
+                printf("mossa non valida\n");
+            }
+            break;
+    }
+
+}
+
 int main() {
     char stage[2] = "x\n";
-    char move;
+    char direction;
+    current_stage.won = false;
+    current_stage.score = 0;
 
     printf("Benvenuto su snake labyrinth\n");
     show_stages(false);
@@ -131,96 +292,12 @@ int main() {
     do {
         do {
             printf("Inserisci la tua mossa (h - j - k - l)\n");
-            scanf(" %c", &move);
-            switch (move) {
-                case 'h':
-                    if (current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]-1] != '#') {
-                        if (current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]-1] == '_') {
-                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]] = ' ';
-                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]-1] = 'o';
-                            current_stage.current_position[1] = current_stage.current_position[1]-1;
-                            clear();
-                            show_stages(true);
-                            printf("hai vinto\n");
-                            current_stage.won = true;
-                        } else {
-                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]] = ' ';
-                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]-1] = 'o';
-                            current_stage.current_position[1] = current_stage.current_position[1]-1;
-                            clear();
-                            show_stages(true);
-                        }
-                    } else {
-                        printf("mossa non valida");
-                    }
-                    break;
-                case 'j':
-                    if (current_stage.playground[current_stage.current_position[0]+1][current_stage.current_position[1]] != '#') {
-                        if (current_stage.playground[current_stage.current_position[0]+1][current_stage.current_position[1]] == '_') {
-                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]] = ' ';
-                            current_stage.playground[current_stage.current_position[0]+1][current_stage.current_position[1]] = 'o';
-                            current_stage.current_position[0] = current_stage.current_position[0]+1;
-                            clear();
-                            show_stages(true);
-                            printf("hai vinto\n");
-                            current_stage.won = true;
-                        } else {
-                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]] = ' ';
-                            current_stage.playground[current_stage.current_position[0]+1][current_stage.current_position[1]] = 'o';
-                            current_stage.current_position[0] = current_stage.current_position[0]+1;
-                            clear();
-                            show_stages(true);
-                        }
-                    } else {
-                        printf("mossa non valida");
-                    }
-                    break;
-                case 'k':
-                    if (current_stage.playground[current_stage.current_position[0]-1][current_stage.current_position[1]] != '#') {
-                        if (current_stage.playground[current_stage.current_position[0]-1][current_stage.current_position[1]] == '_') {
-                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]] = ' ';
-                            current_stage.playground[current_stage.current_position[0]-1][current_stage.current_position[1]] = 'o';
-                            current_stage.current_position[0] = current_stage.current_position[0]-1;
-                            clear();
-                            show_stages(true);
-                            printf("hai vinto\n");
-                            current_stage.won = true;
-                        } else {
-                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]] = ' ';
-                            current_stage.playground[current_stage.current_position[0]-1][current_stage.current_position[1]] = 'o';
-                            current_stage.current_position[0] = current_stage.current_position[0]-1;
-                            clear();
-                            show_stages(true);
-                        }
-                    } else {
-                        printf("mossa non valida");
-                    }
-
-                    break;
-                case 'l':
-                    if (current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]+1] != '#') {
-                        if (current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]+1] == '_') {
-                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]] = ' ';
-                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]+1] = 'o';
-                            current_stage.current_position[1] = current_stage.current_position[1]+1;
-                            clear();
-                            show_stages(true);
-                            printf("hai vinto\n");
-                            current_stage.won = true;
-                        } else {
-                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]] = ' ';
-                            current_stage.playground[current_stage.current_position[0]][current_stage.current_position[1]+1] = 'o';
-                            current_stage.current_position[1] = current_stage.current_position[1]+1;
-                            clear();
-                            show_stages(true);
-                        }
-                    } else {
-                        printf("mossa non valida");
-                    }
-                    break;
-            }
-        } while (move != 'h' && move != 'j' && move != 'k' && move != 'l');
+            scanf(" %c", &direction);
+            move(direction);
+            printf("Punteggio attuale: %d\n", current_stage.score);
+        } while (direction != 'h' && direction != 'j' && direction != 'k' && direction != 'l');
     } while (!current_stage.won);
+    printf("Il tuo punteggio: %d\n", current_stage.score);
 
     return 0;
 }
