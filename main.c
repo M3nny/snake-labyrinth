@@ -325,8 +325,8 @@ void move (char direction) {
 }
 
 int main() {
-    int mode;
     char stage[2] = "x\n";
+    int mode;
     char direction;
     int moves_counter = 0;
 
