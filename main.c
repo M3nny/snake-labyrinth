@@ -10,6 +10,7 @@ struct stage {
     int columns; // colonne del labirinto
 
     int position[2]; // position[0] è la riga attuale, position[1] è la colonna attuale
+    int origin[2];
     char starting_wall;
     bool won; // flag per vedere se il giocatore ha vinto
 
@@ -104,6 +105,8 @@ void load_labyrinth (const char *stage) {
                         c = fgetc(file);
                         current_stage.playground[i][j] = c;
                         if (c == 'o') {
+                            current_stage.origin[0] = i;
+                            current_stage.origin[1] = j;
                             current_stage.position[0] = i;
                             current_stage.position[1] = j;
 
@@ -139,10 +142,16 @@ void clear () {
 
 void move (char direction) {
     char next_position;
-    bool pierced_wall;
     bool scored = false;
     switch (direction) {
         case 'h':
+            // prima di effettuare altri controlli, guardo se la mossa mi fa andare fuori da dove sono entrato
+            if (current_stage.starting_wall == 'w') {
+                if (current_stage.position[1]-1 == current_stage.origin[1]-1) {
+                    printf("Mossa non valida\n");
+                    break;
+                }
+            }
             next_position = current_stage.playground[current_stage.position[0]][current_stage.position[1]-1];
 
             if (next_position != '#' && next_position == '_') { // se ha raggiunto l'uscita
@@ -156,7 +165,7 @@ void move (char direction) {
                 show_stages(true);
                 printf("hai vinto\n");
                 current_stage.won = true;
-            } else if (next_position != '#') { // se non va contro un muro e fuori per l'entrata
+            } else if (next_position != '#') {
                 if (next_position == '$') {
                     current_stage.score += 3;
                     scored = true;
@@ -174,10 +183,6 @@ void move (char direction) {
                 }
 
                 clear();
-            if (current_stage.starting_wall == 'w') {
-                pierced_wall = true;
-                printf("muro iniziale a ovest\n");
-            }
                 show_stages(true);
             }
             else {
@@ -185,6 +190,12 @@ void move (char direction) {
             }
             break;
         case 'j':
+            if (current_stage.starting_wall == 's') {
+                if (current_stage.position[0]+1 == current_stage.origin[0]+1) {
+                    printf("Mossa non valida\n");
+                    break;
+                }
+            }
             next_position = current_stage.playground[current_stage.position[0]+1][current_stage.position[1]];
 
             if (next_position != '#' && next_position == '_') {
@@ -223,6 +234,12 @@ void move (char direction) {
             }
             break;
         case 'k':
+            if (current_stage.starting_wall == 'n') {
+                if (current_stage.position[0]-1 == current_stage.origin[0]-1) {
+                    printf("Mossa non valida\n");
+                    break;
+                }
+            }
             next_position = current_stage.playground[current_stage.position[0]-1][current_stage.position[1]];
             if (next_position != '#' && next_position == '_') {
                 current_stage.playground[current_stage.position[0]][current_stage.position[1]] = ' ';
@@ -261,6 +278,12 @@ void move (char direction) {
 
             break;
         case 'l':
+            if (current_stage.starting_wall == 'e') {
+                if (current_stage.position[1]+1 == current_stage.origin[1]+1) {
+                    printf("Mossa non valida\n");
+                    break;
+                }
+            }
             next_position = current_stage.playground[current_stage.position[0]][current_stage.position[1]+1];
             if (next_position != '#' && next_position == '_') {
                 current_stage.playground[current_stage.position[0]][current_stage.position[1]] = ' ';
