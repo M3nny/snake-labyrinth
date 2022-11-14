@@ -9,6 +9,7 @@
 
 int main() {
     struct labyrinth_stage stage;
+    struct labyrinth_player player;
 
     char selected_stage[2] = "x\n";
     int mode;
@@ -16,9 +17,9 @@ int main() {
     int moves_counter = 0;
     srand (time(NULL));
 
-    stage.moves_storage = malloc(sizeof(char) * 1);
-    stage.won = false;
-    stage.score = 0;
+    player.moves_storage = malloc(sizeof(char) * 1);
+    player.won = false;
+    player.score = 0;
 
     printf("Benvenuto su snake labyrinth\n");
     do {
@@ -26,7 +27,7 @@ int main() {
         printf("(input modalità): ");
         scanf("%d", &mode);
     } while (mode != 1 && mode != 2);
-    show_labyrinth_stages(false, &stage);
+    show_stages(false, &stage);
 
     do {
         printf("\nSeleziona una mappa (1 - 2)\n");
@@ -34,10 +35,10 @@ int main() {
         scanf(" %c", &selected_stage[0]);
     } while (selected_stage[0] != '1' && selected_stage[0] != '2');
 
-    load_labyrinth(selected_stage, &stage);
+    load_game(selected_stage, &stage, &player);
     clear();
     printf("Mappa selezionata:\n");
-    show_labyrinth_stages(true, &stage);
+    show_stages(true, &stage);
 
     do {
         do {
@@ -60,23 +61,23 @@ int main() {
                         break;
                 }
             }
-            move(direction, &stage);
+            move(direction, &stage, &player);
 
-            stage.moves_storage[moves_counter] = direction;
+            player.moves_storage[moves_counter] = direction;
             moves_counter++;
-            stage.moves_storage = realloc(stage.moves_storage, (moves_counter + 1) * sizeof(char));
+            player.moves_storage = realloc(player.moves_storage, (moves_counter + 1) * sizeof(char));
 
-            printf("Punteggio: %d\n", stage.score);
+            printf("Punteggio: %d\n", player.score);
         } while (direction != 'h' && direction != 'j' && direction != 'k' && direction != 'l');
-    } while (!stage.won);
+    } while (!player.won);
 
     printf("Elenco delle mosse eseguite: ");
     for (int i = 0; i < moves_counter; i++) {
-        printf("%c",stage.moves_storage[i]);
+        printf("%c",player.moves_storage[i]);
     }
     printf("\n");
     free(stage.playground);
-    free(stage.moves_storage);
+    free(player.moves_storage);
 
     return 0;
 }

@@ -2,18 +2,19 @@ struct labyrinth_stage {
     char **playground; // contiene il livello
     int rows; // righe del labirinto
     int columns; // colonne del labirinto
+};
 
+struct labyrinth_player {
     int position[2]; // position[0] è la riga attuale, position[1] è la colonna attuale
     int origin[2];
     bool won; // flag per vedere se il giocatore ha vinto
-
     char *moves_storage;
     int score; // tiene conto del punteggio
 };
 
 // se il livello deve ancora essere selezionato stampo tutto il file
 // altrimenti stampo il livello caricato in memoria
-void show_labyrinth_stages(bool loaded, struct labyrinth_stage *stage) {
+void show_stages(bool loaded, struct labyrinth_stage *stage) {
     if (!loaded) {
         FILE* file = fopen("labyrinth.txt", "r");
 
@@ -38,7 +39,7 @@ void show_labyrinth_stages(bool loaded, struct labyrinth_stage *stage) {
     }
 }
 
-void load_labyrinth (const char *labyrinth_stage, struct labyrinth_stage *stage) {
+void load_game (const char *labyrinth_stage, struct labyrinth_stage *stage, struct labyrinth_player *player) {
     FILE* file = fopen("labyrinth.txt", "r");
 
     if(!file) {
@@ -97,10 +98,10 @@ void load_labyrinth (const char *labyrinth_stage, struct labyrinth_stage *stage)
                         c = fgetc(file);
                         stage->playground[i][j] = c;
                         if (c == 'o') {
-                            stage->origin[0] = i;
-                            stage->origin[1] = j;
-                            stage->position[0] = i;
-                            stage->position[1] = j;
+                            player->origin[0] = i;
+                            player->origin[1] = j;
+                            player->position[0] = i;
+                            player->position[1] = j;
                         }
                     } while (c == '\n');
                 }
