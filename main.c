@@ -8,17 +8,17 @@
 #include "movement.h"
 
 int main() {
-    struct stage current_stage;
+    struct labyrinth_stage stage;
 
-    char selected_stage[2] = "x\n";
+    char selected_labyrinth_stage[2] = "x\n";
     int mode;
     char direction;
     int moves_counter = 0;
     srand (time(NULL));
 
-    current_stage.moves_storage = malloc(sizeof(char) * 1);
-    current_stage.won = false;
-    current_stage.score = 0;
+    stage.moves_storage = malloc(sizeof(char) * 1);
+    stage.won = false;
+    stage.score = 0;
 
     printf("Benvenuto su snake labyrinth\n");
     do {
@@ -26,18 +26,18 @@ int main() {
         printf("(input modalità): ");
         scanf("%d", &mode);
     } while (mode != 1 && mode != 2);
-    show_stages(false, &current_stage);
+    show_labyrinth_stages(false, &stage);
 
     do {
         printf("\nSeleziona una mappa (1 - 2)\n");
         printf("(input mappa): ");
-        scanf(" %c", &selected_stage[0]);
-    } while (selected_stage[0] != '1' && selected_stage[0] != '2');
+        scanf(" %c", &selected_labyrinth_stage[0]);
+    } while (selected_labyrinth_stage[0] != '1' && selected_labyrinth_stage[0] != '2');
 
-    load_labyrinth(selected_stage, &current_stage);
+    load_labyrinth(selected_labyrinth_stage, &stage);
     clear();
     printf("Mappa selezionata:\n");
-    show_stages(true, &current_stage);
+    show_labyrinth_stages(true, &stage);
 
     do {
         do {
@@ -60,23 +60,23 @@ int main() {
                         break;
                 }
             }
-            move(direction, &current_stage);
+            move(direction, &stage);
 
-            current_stage.moves_storage[moves_counter] = direction;
+            stage.moves_storage[moves_counter] = direction;
             moves_counter++;
-            current_stage.moves_storage = realloc(current_stage.moves_storage, (moves_counter + 1) * sizeof(char));
+            stage.moves_storage = realloc(stage.moves_storage, (moves_counter + 1) * sizeof(char));
 
-            printf("Punteggio: %d\n", current_stage.score);
+            printf("Punteggio: %d\n", stage.score);
         } while (direction != 'h' && direction != 'j' && direction != 'k' && direction != 'l');
-    } while (!current_stage.won);
+    } while (!stage.won);
 
     printf("Elenco delle mosse eseguite: ");
     for (int i = 0; i < moves_counter; i++) {
-        printf("%c",current_stage.moves_storage[i]);
+        printf("%c",stage.moves_storage[i]);
     }
     printf("\n");
-    free(current_stage.playground);
-    free(current_stage.moves_storage);
+    free(stage.playground);
+    free(stage.moves_storage);
 
     return 0;
 }

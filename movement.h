@@ -1,159 +1,159 @@
-void move (char direction, struct stage *current_stage) {
+void move (char direction, struct labyrinth_stage *stage) {
     char next_position;
     bool scored = false;
 
     switch (direction) {
         case 'h':
             // prima di effettuare altri controlli, guardo se la mossa mi fa andare fuori da dove sono entrato
-            next_position = current_stage->playground[current_stage->position[0]][current_stage->position[1]-1];
+            next_position = stage->playground[stage->position[0]][stage->position[1]-1];
             if (next_position == 0) {
                 return;
             }
 
             if (next_position != '#' && next_position == '_') { // se ha raggiunto l'uscita
-                current_stage->playground[current_stage->position[0]][current_stage->position[1]] = ' ';
-                current_stage->playground[current_stage->position[0]][current_stage->position[1]-1] = 'o';
-                current_stage->position[1] = current_stage->position[1]-1;
+                stage->playground[stage->position[0]][stage->position[1]] = ' ';
+                stage->playground[stage->position[0]][stage->position[1]-1] = 'o';
+                stage->position[1] = stage->position[1]-1;
 
-                current_stage->score--;
+                stage->score--;
 
                 clear();
-                show_stages(true, current_stage);
+                show_labyrinth_stages(true, stage);
                 printf("hai vinto\n");
-                current_stage->won = true;
+                stage->won = true;
             } else if (next_position != '#') {
                 if (next_position == '$') {
-                    current_stage->score += 3;
+                    stage->score += 3;
                     scored = true;
                 }
                 if (next_position == '!') {
-                    current_stage->score /= 2;
+                    stage->score /= 2;
                     scored = true;
                 }
-                current_stage->playground[current_stage->position[0]][current_stage->position[1]] = ' ';
-                current_stage->playground[current_stage->position[0]][current_stage->position[1]-1] = 'o';
-                current_stage->position[1] = current_stage->position[1]-1;
+                stage->playground[stage->position[0]][stage->position[1]] = ' ';
+                stage->playground[stage->position[0]][stage->position[1]-1] = 'o';
+                stage->position[1] = stage->position[1]-1;
 
                 if (!scored) {
-                    current_stage->score--;
+                    stage->score--;
                 }
 
                 clear();
-                show_stages(true, current_stage);
+                show_labyrinth_stages(true, stage);
             }
             break;
         case 'j':
-            next_position = current_stage->playground[current_stage->position[0]+1][current_stage->position[1]];
-            if (next_position == current_stage->rows - 1) {
+            next_position = stage->playground[stage->position[0]+1][stage->position[1]];
+            if (next_position == stage->rows - 1) {
                 return;
             }
 
             if (next_position != '#' && next_position == '_') {
-                current_stage->playground[current_stage->position[0]][current_stage->position[1]] = ' ';
-                current_stage->playground[current_stage->position[0]+1][current_stage->position[1]] = 'o';
-                current_stage->position[0] = current_stage->position[0]+1;
+                stage->playground[stage->position[0]][stage->position[1]] = ' ';
+                stage->playground[stage->position[0]+1][stage->position[1]] = 'o';
+                stage->position[0] = stage->position[0]+1;
 
-                current_stage->score--;
+                stage->score--;
 
                 clear();
-                show_stages(true, current_stage);
+                show_labyrinth_stages(true, stage);
                 printf("hai vinto\n");
-                current_stage->won = true;
+                stage->won = true;
             } else if (next_position != '#'){
                 if (next_position == '$') {
-                    current_stage->score += 3;
+                    stage->score += 3;
                     scored = true;
                 }
                 if (next_position == '!') {
-                    current_stage->score /= 2;
+                    stage->score /= 2;
                     scored = true;
                 }
-                current_stage->playground[current_stage->position[0]][current_stage->position[1]] = ' ';
-                current_stage->playground[current_stage->position[0]+1][current_stage->position[1]] = 'o';
-                current_stage->position[0] = current_stage->position[0]+1;
+                stage->playground[stage->position[0]][stage->position[1]] = ' ';
+                stage->playground[stage->position[0]+1][stage->position[1]] = 'o';
+                stage->position[0] = stage->position[0]+1;
 
                 if (!scored) {
-                    current_stage->score--;
+                    stage->score--;
                 }
 
                 clear();
-                show_stages(true, current_stage);
+                show_labyrinth_stages(true, stage);
             }
             break;
         case 'k':
-            next_position = current_stage->playground[current_stage->position[0]-1][current_stage->position[1]];
+            next_position = stage->playground[stage->position[0]-1][stage->position[1]];
             if (next_position == 0) {
                 return;
             }
 
             if (next_position != '#' && next_position == '_') {
-                current_stage->playground[current_stage->position[0]][current_stage->position[1]] = ' ';
-                current_stage->playground[current_stage->position[0]-1][current_stage->position[1]] = 'o';
-                current_stage->position[0] = current_stage->position[0]-1;
+                stage->playground[stage->position[0]][stage->position[1]] = ' ';
+                stage->playground[stage->position[0]-1][stage->position[1]] = 'o';
+                stage->position[0] = stage->position[0]-1;
 
-                current_stage->score--;
+                stage->score--;
 
                 clear();
-                show_stages(true, current_stage);
+                show_labyrinth_stages(true, stage);
                 printf("hai vinto\n");
-                current_stage->won = true;
+                stage->won = true;
             } else if (next_position != '#'){
                 if (next_position == '$') {
-                    current_stage->score += 3;
+                    stage->score += 3;
                     scored = true;
                 }
                 if (next_position == '!') {
-                    current_stage->score /= 2;
+                    stage->score /= 2;
                     scored = true;
                 }
-                current_stage->playground[current_stage->position[0]][current_stage->position[1]] = ' ';
-                current_stage->playground[current_stage->position[0]-1][current_stage->position[1]] = 'o';
-                current_stage->position[0] = current_stage->position[0]-1;
+                stage->playground[stage->position[0]][stage->position[1]] = ' ';
+                stage->playground[stage->position[0]-1][stage->position[1]] = 'o';
+                stage->position[0] = stage->position[0]-1;
 
                 if (!scored) {
-                    current_stage->score--;
+                    stage->score--;
                 }
 
                 clear();
-                show_stages(true, current_stage);
+                show_labyrinth_stages(true, stage);
             }
             break;
         case 'l':
-            next_position = current_stage->playground[current_stage->position[0]][current_stage->position[1]+1];
-            if (next_position == current_stage->columns - 1) {
+            next_position = stage->playground[stage->position[0]][stage->position[1]+1];
+            if (next_position == stage->columns - 1) {
                 return;
             }
 
             if (next_position != '#' && next_position == '_') {
-                current_stage->playground[current_stage->position[0]][current_stage->position[1]] = ' ';
-                current_stage->playground[current_stage->position[0]][current_stage->position[1]+1] = 'o';
-                current_stage->position[1] = current_stage->position[1]+1;
+                stage->playground[stage->position[0]][stage->position[1]] = ' ';
+                stage->playground[stage->position[0]][stage->position[1]+1] = 'o';
+                stage->position[1] = stage->position[1]+1;
 
-                current_stage->score--;
+                stage->score--;
 
                 clear();
-                show_stages(true, current_stage);
+                show_labyrinth_stages(true, stage);
                 printf("hai vinto\n");
-                current_stage->won = true;
+                stage->won = true;
             } else if (next_position != '#'){
                 if (next_position == '$') {
-                    current_stage->score += 3;
+                    stage->score += 3;
                     scored = true;
                 }
                 if (next_position == '!') {
-                    current_stage->score /= 2;
+                    stage->score /= 2;
                     scored = true;
                 }
-                current_stage->playground[current_stage->position[0]][current_stage->position[1]] = ' ';
-                current_stage->playground[current_stage->position[0]][current_stage->position[1]+1] = 'o';
-                current_stage->position[1] = current_stage->position[1]+1;
+                stage->playground[stage->position[0]][stage->position[1]] = ' ';
+                stage->playground[stage->position[0]][stage->position[1]+1] = 'o';
+                stage->position[1] = stage->position[1]+1;
 
                 if (!scored) {
-                    current_stage->score--;
+                    stage->score--;
                 }
 
                 clear();
-                show_stages(true, current_stage);
+                show_labyrinth_stages(true, stage);
             }
             break;
     }
