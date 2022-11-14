@@ -5,7 +5,6 @@ struct stage {
 
     int position[2]; // position[0] è la riga attuale, position[1] è la colonna attuale
     int origin[2];
-    char starting_wall;
     bool won; // flag per vedere se il giocatore ha vinto
 
     char *moves_storage;
@@ -102,17 +101,6 @@ void load_labyrinth (const char *stage, struct stage *current_stage) {
                             current_stage->origin[1] = j;
                             current_stage->position[0] = i;
                             current_stage->position[1] = j;
-
-                            if (current_stage->position[1] == 0) {
-                                current_stage->starting_wall = 'w';
-                            } else if (current_stage->position[0] == (current_stage->rows - 1))
-                                current_stage->starting_wall = 's';
-                            else if (current_stage->position[0] == 0) {
-                                current_stage->starting_wall = 'n';
-                            }
-                            else if (current_stage->position[1] == (current_stage->columns - 1)) {
-                                current_stage->starting_wall = 'e';
-                            }
                         }
                     } while (c == '\n');
                 }

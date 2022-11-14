@@ -1,15 +1,14 @@
 void move (char direction, struct stage *current_stage) {
     char next_position;
     bool scored = false;
+
     switch (direction) {
         case 'h':
             // prima di effettuare altri controlli, guardo se la mossa mi fa andare fuori da dove sono entrato
-            if (current_stage->starting_wall == 'w') {
-                if (current_stage->position[1]-1 == current_stage->origin[1]-1) {
-                    break;
-                }
-            }
             next_position = current_stage->playground[current_stage->position[0]][current_stage->position[1]-1];
+            if (next_position == 0) {
+                return;
+            }
 
             if (next_position != '#' && next_position == '_') { // se ha raggiunto l'uscita
                 current_stage->playground[current_stage->position[0]][current_stage->position[1]] = ' ';
@@ -44,12 +43,10 @@ void move (char direction, struct stage *current_stage) {
             }
             break;
         case 'j':
-            if (current_stage->starting_wall == 's') {
-                if (current_stage->position[0]+1 == current_stage->origin[0]+1) {
-                    break;
-                }
-            }
             next_position = current_stage->playground[current_stage->position[0]+1][current_stage->position[1]];
+            if (next_position == current_stage->rows - 1) {
+                return;
+            }
 
             if (next_position != '#' && next_position == '_') {
                 current_stage->playground[current_stage->position[0]][current_stage->position[1]] = ' ';
@@ -84,12 +81,11 @@ void move (char direction, struct stage *current_stage) {
             }
             break;
         case 'k':
-            if (current_stage->starting_wall == 'n') {
-                if (current_stage->position[0]-1 == current_stage->origin[0]-1) {
-                    break;
-                }
-            }
             next_position = current_stage->playground[current_stage->position[0]-1][current_stage->position[1]];
+            if (next_position == 0) {
+                return;
+            }
+
             if (next_position != '#' && next_position == '_') {
                 current_stage->playground[current_stage->position[0]][current_stage->position[1]] = ' ';
                 current_stage->playground[current_stage->position[0]-1][current_stage->position[1]] = 'o';
@@ -123,12 +119,11 @@ void move (char direction, struct stage *current_stage) {
             }
             break;
         case 'l':
-            if (current_stage->starting_wall == 'e') {
-                if (current_stage->position[1]+1 == current_stage->origin[1]+1) {
-                    break;
-                }
-            }
             next_position = current_stage->playground[current_stage->position[0]][current_stage->position[1]+1];
+            if (next_position == current_stage->columns - 1) {
+                return;
+            }
+
             if (next_position != '#' && next_position == '_') {
                 current_stage->playground[current_stage->position[0]][current_stage->position[1]] = ' ';
                 current_stage->playground[current_stage->position[0]][current_stage->position[1]+1] = 'o';

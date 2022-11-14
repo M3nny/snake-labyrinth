@@ -16,7 +16,7 @@ int main() {
     int moves_counter = 0;
     srand (time(NULL));
 
-    current_stage.moves_storage = malloc(sizeof *current_stage.moves_storage * 1);
+    current_stage.moves_storage = malloc(sizeof(char) * 1);
     current_stage.won = false;
     current_stage.score = 0;
 
@@ -64,7 +64,7 @@ int main() {
 
             current_stage.moves_storage[moves_counter] = direction;
             moves_counter++;
-            current_stage.moves_storage = realloc(current_stage.moves_storage, (moves_counter + 1) * sizeof *current_stage.moves_storage);
+            current_stage.moves_storage = realloc(current_stage.moves_storage, (moves_counter + 1) * sizeof(char));
 
             printf("Punteggio: %d\n", current_stage.score);
         } while (direction != 'h' && direction != 'j' && direction != 'k' && direction != 'l');
