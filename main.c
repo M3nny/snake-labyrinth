@@ -10,7 +10,7 @@
 int main() {
     struct labyrinth_stage stage;
 
-    char selected_labyrinth_stage[2] = "x\n";
+    char selected_stage[2] = "x\n";
     int mode;
     char direction;
     int moves_counter = 0;
@@ -31,10 +31,10 @@ int main() {
     do {
         printf("\nSeleziona una mappa (1 - 2)\n");
         printf("(input mappa): ");
-        scanf(" %c", &selected_labyrinth_stage[0]);
-    } while (selected_labyrinth_stage[0] != '1' && selected_labyrinth_stage[0] != '2');
+        scanf(" %c", &selected_stage[0]);
+    } while (selected_stage[0] != '1' && selected_stage[0] != '2');
 
-    load_labyrinth(selected_labyrinth_stage, &stage);
+    load_labyrinth(selected_stage, &stage);
     clear();
     printf("Mappa selezionata:\n");
     show_labyrinth_stages(true, &stage);
