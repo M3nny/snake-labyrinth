@@ -10,6 +10,7 @@ struct labyrinth_player {
     bool won; // flag per vedere se il giocatore ha vinto
     char *moves_storage;
     int score; // tiene conto del punteggio
+    char left, up, down, right;
 };
 
 // se il livello deve ancora essere selezionato stampo tutto il file
@@ -51,6 +52,10 @@ void load_game (const char *labyrinth_stage, struct labyrinth_stage *stage, stru
     int rows = 0, columns = 0; // numero di righe e colonne
     bool selected = false;
     char c;
+    player->left = 'h';
+    player->up = 'k';
+    player->down = 'j';
+    player->right = 'l';
 
     while (fgets(line, sizeof(line), file)) { // leggo tutto il file e stoppo il ciclo dopo aver letto il labirinto
         if ((strcmp(line, labyrinth_stage)) == 0) { // se trovo il numero corrispondente al labirinto comincio a leggerlo

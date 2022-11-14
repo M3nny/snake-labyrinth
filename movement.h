@@ -1,9 +1,7 @@
 void move (char direction, struct labyrinth_stage *stage, struct labyrinth_player *player) {
     char next_position;
     bool scored = false;
-
-    switch (direction) {
-        case 'h':
+        if (direction == player->left) {
             // prima di effettuare altri controlli, guardo se la mossa mi fa andare fuori da dove sono entrato
             next_position = stage->playground[player->position[0]][player->position[1]-1];
             if (next_position == 0) {
@@ -16,10 +14,6 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
                 player->position[1] = player->position[1]-1;
 
                 player->score--;
-
-                clear();
-                show_stages(true, stage);
-                printf("hai vinto\n");
                 player->won = true;
             } else if (next_position != '#') {
                 if (next_position == '$') {
@@ -37,12 +31,8 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
                 if (!scored) {
                     player->score--;
                 }
-
-                clear();
-                show_stages(true, stage);
             }
-            break;
-        case 'j':
+        } else if (direction == player->down) {
             next_position = stage->playground[player->position[0]+1][player->position[1]];
             if (next_position == stage->rows - 1) {
                 return;
@@ -54,10 +44,6 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
                 player->position[0] = player->position[0]+1;
 
                 player->score--;
-
-                clear();
-                show_stages(true, stage);
-                printf("hai vinto\n");
                 player->won = true;
             } else if (next_position != '#'){
                 if (next_position == '$') {
@@ -75,12 +61,8 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
                 if (!scored) {
                     player->score--;
                 }
-
-                clear();
-                show_stages(true, stage);
             }
-            break;
-        case 'k':
+        } else if (direction == player->up) {
             next_position = stage->playground[player->position[0]-1][player->position[1]];
             if (next_position == 0) {
                 return;
@@ -92,10 +74,6 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
                 player->position[0] = player->position[0]-1;
 
                 player->score--;
-
-                clear();
-                show_stages(true, stage);
-                printf("hai vinto\n");
                 player->won = true;
             } else if (next_position != '#'){
                 if (next_position == '$') {
@@ -113,12 +91,8 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
                 if (!scored) {
                     player->score--;
                 }
-
-                clear();
-                show_stages(true, stage);
             }
-            break;
-        case 'l':
+        } else if (direction == player->right) {
             next_position = stage->playground[player->position[0]][player->position[1]+1];
             if (next_position == stage->columns - 1) {
                 return;
@@ -130,10 +104,6 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
                 player->position[1] = player->position[1]+1;
 
                 player->score--;
-
-                clear();
-                show_stages(true, stage);
-                printf("hai vinto\n");
                 player->won = true;
             } else if (next_position != '#'){
                 if (next_position == '$') {
@@ -151,10 +121,6 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
                 if (!scored) {
                     player->score--;
                 }
-
-                clear();
-                show_stages(true, stage);
             }
-            break;
     }
 }

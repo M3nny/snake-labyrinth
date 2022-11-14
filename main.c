@@ -6,8 +6,15 @@
 #include <time.h>
 #include "labyrinth_loader.h"
 #include "movement.h"
+#include "challenges.h"
 
-int main() {
+int main(int argc, char **argv) {
+    if (argv[1]) {
+        if (strcmp(argv[1], "--challenge") == 0) {
+            challenge1();
+            return 0;
+        }
+    }
     struct labyrinth_stage stage;
     struct labyrinth_player player;
 
@@ -30,10 +37,10 @@ int main() {
     show_stages(false, &stage);
 
     do {
-        printf("\nSeleziona una mappa (1 - 2)\n");
+        printf("\nSeleziona una mappa (1 - 2 - 3)\n");
         printf("(input mappa): ");
         scanf(" %c", &selected_stage[0]);
-    } while (selected_stage[0] != '1' && selected_stage[0] != '2');
+    } while (selected_stage[0] != '1' && selected_stage[0] != '2' && selected_stage[0] != '3');
 
     load_game(selected_stage, &stage, &player);
     clear();
@@ -48,20 +55,22 @@ int main() {
                 direction = rand() % 4;
                 switch (direction) {
                     case 0:
-                        direction = 'h';
+                        direction = player.left;
                         break;
                     case 1:
-                        direction = 'j';
+                        direction = player.down;
                         break;
                     case 2:
-                        direction = 'k';
+                        direction = player.up;
                         break;
                     case 3:
-                        direction = 'l';
+                        direction = player.right;
                         break;
                 }
             }
             move(direction, &stage, &player);
+            clear();
+            show_stages(true, &stage);
 
             player.moves_storage[moves_counter] = direction;
             moves_counter++;
@@ -70,6 +79,7 @@ int main() {
             printf("Punteggio: %d\n", player.score);
         } while (direction != 'h' && direction != 'j' && direction != 'k' && direction != 'l');
     } while (!player.won);
+    printf("Hai vinto!");
 
     printf("Elenco delle mosse eseguite: ");
     for (int i = 0; i < moves_counter; i++) {
