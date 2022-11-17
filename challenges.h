@@ -22,7 +22,7 @@ void challenge1() {
     }
 
     bot.won = false;
-    bot.score = 0;
+    bot.score = 1000;
     bot.left = 'O';
     bot.down = 'S';
     bot.up = 'N';
@@ -119,4 +119,11 @@ void challenge1() {
     for (int i = 0; i < moves_counter; i++) {
         printf("%c",bot.moves_storage[i]);
     }
+    printf("\n");
+
+    for ( size_t i = 0; i < stage_AI.rows; i++ ) {
+        free(stage_AI.playground[i]);
+    }
+    free(stage_AI.playground);
+    free(bot.moves_storage);
 }

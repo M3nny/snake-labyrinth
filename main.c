@@ -25,8 +25,6 @@ int main(int argc, char **argv) {
     srand (time(NULL));
 
     player.moves_storage = malloc(sizeof(char) * 1);
-    player.won = false;
-    player.score = 0;
 
     printf("Benvenuto su snake labyrinth\n");
     do {
@@ -79,13 +77,17 @@ int main(int argc, char **argv) {
             printf("Punteggio: %d\n", player.score);
         } while (direction != 'h' && direction != 'j' && direction != 'k' && direction != 'l');
     } while (!player.won);
-    printf("Hai vinto!");
+    printf("Hai vinto!\n");
 
     printf("Elenco delle mosse eseguite: ");
     for (int i = 0; i < moves_counter; i++) {
         printf("%c",player.moves_storage[i]);
     }
     printf("\n");
+
+    for ( size_t i = 0; i < stage.rows; i++ ) {
+        free(stage.playground[i]);
+    }
     free(stage.playground);
     free(player.moves_storage);
 

@@ -4,7 +4,7 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
         if (direction == player->left) {
             // prima di effettuare altri controlli, guardo se la mossa mi fa andare fuori da dove sono entrato
             next_position = stage->playground[player->position[0]][player->position[1]-1];
-            if (next_position == 0) {
+            if (player->position[1]-1 < 0) {
                 return;
             }
 
@@ -17,7 +17,7 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
                 player->won = true;
             } else if (next_position != '#') {
                 if (next_position == '$') {
-                    player->score += 3;
+                    player->score += 10;
                     scored = true;
                 }
                 if (next_position == '!') {
@@ -34,7 +34,7 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
             }
         } else if (direction == player->down) {
             next_position = stage->playground[player->position[0]+1][player->position[1]];
-            if (next_position == stage->rows - 1) {
+            if (player->position[0]+1 >= stage->rows) {
                 return;
             }
 
@@ -47,7 +47,7 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
                 player->won = true;
             } else if (next_position != '#'){
                 if (next_position == '$') {
-                    player->score += 3;
+                    player->score += 10;
                     scored = true;
                 }
                 if (next_position == '!') {
@@ -64,7 +64,7 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
             }
         } else if (direction == player->up) {
             next_position = stage->playground[player->position[0]-1][player->position[1]];
-            if (next_position == 0) {
+            if (player->position[0]-1 < 0) {
                 return;
             }
 
@@ -77,7 +77,7 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
                 player->won = true;
             } else if (next_position != '#'){
                 if (next_position == '$') {
-                    player->score += 3;
+                    player->score += 10;
                     scored = true;
                 }
                 if (next_position == '!') {
@@ -94,7 +94,7 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
             }
         } else if (direction == player->right) {
             next_position = stage->playground[player->position[0]][player->position[1]+1];
-            if (next_position == stage->columns - 1) {
+            if (player->position[1]+1 >= stage->columns) {
                 return;
             }
 
@@ -107,7 +107,7 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
                 player->won = true;
             } else if (next_position != '#'){
                 if (next_position == '$') {
-                    player->score += 3;
+                    player->score += 10;
                     scored = true;
                 }
                 if (next_position == '!') {

@@ -52,6 +52,8 @@ void load_game (const char *labyrinth_stage, struct labyrinth_stage *stage, stru
     int rows = 0, columns = 0; // numero di righe e colonne
     bool selected = false;
     char c;
+    player->won = false;
+    player->score = 1000;
     player->left = 'h';
     player->up = 'k';
     player->down = 'j';
