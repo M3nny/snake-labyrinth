@@ -11,6 +11,7 @@ struct labyrinth_player {
     char *moves_storage;
     int score; // tiene conto del punteggio
     char left, up, down, right;
+    int drill;
 };
 
 // se il livello deve ancora essere selezionato stampo tutto il file
@@ -52,6 +53,7 @@ void load_game (const char *labyrinth_stage, struct labyrinth_stage *stage, stru
     int rows = 0, columns = 0; // numero di righe e colonne
     bool selected = false;
     char c;
+    player->drill = 0;
     player->won = false;
     player->score = 1000;
     player->left = 'h';
