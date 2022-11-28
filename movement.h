@@ -9,22 +9,19 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
 
             next_position = stage->playground[player->position[0]][player->position[1]-1];
 
-            if (next_position != '#' && next_position == '_') { // se ha raggiunto l'uscita
-                stage->playground[player->position[0]][player->position[1]] = ' ';
-                stage->playground[player->position[0]][player->position[1]-1] = 'o';
-                player->position[1] = player->position[1]-1;
-
-                player->score--;
-                player->won = true;
-            } else if (next_position != '#') {
-                if (next_position == '$') {
+            if (next_position != '#') { // se la prossima cella non è un muro valuto tutte le possibili opzioni
+                if (next_position == '_') { // ha vinto
+                    player->won = true;
+                }
+                if (next_position == '$') { // punti bonus
                     player->score += 10;
                     scored = true;
                 }
-                if (next_position == '!') {
+                if (next_position == '!') { // punti dimezzati
                     player->score /= 2;
                     scored = true;
                 }
+                // aggiorno la posizione
                 stage->playground[player->position[0]][player->position[1]] = ' ';
                 stage->playground[player->position[0]][player->position[1]-1] = 'o';
                 player->position[1] = player->position[1]-1;
@@ -40,14 +37,10 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
 
             next_position = stage->playground[player->position[0]+1][player->position[1]];
 
-            if (next_position != '#' && next_position == '_') {
-                stage->playground[player->position[0]][player->position[1]] = ' ';
-                stage->playground[player->position[0]+1][player->position[1]] = 'o';
-                player->position[0] = player->position[0]+1;
-
-                player->score--;
-                player->won = true;
-            } else if (next_position != '#'){
+            if (next_position != '#') {
+                if (next_position == '_') {
+                    player->won = true;
+                }
                 if (next_position == '$') {
                     player->score += 10;
                     scored = true;
@@ -71,14 +64,10 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
 
             next_position = stage->playground[player->position[0]-1][player->position[1]];
 
-            if (next_position != '#' && next_position == '_') {
-                stage->playground[player->position[0]][player->position[1]] = ' ';
-                stage->playground[player->position[0]-1][player->position[1]] = 'o';
-                player->position[0] = player->position[0]-1;
-
-                player->score--;
-                player->won = true;
-            } else if (next_position != '#'){
+            if (next_position != '#') {
+                if (next_position == '_') {
+                    player->won = true;
+                }
                 if (next_position == '$') {
                     player->score += 10;
                     scored = true;
@@ -102,14 +91,10 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
 
             next_position = stage->playground[player->position[0]][player->position[1]+1];
 
-            if (next_position != '#' && next_position == '_') {
-                stage->playground[player->position[0]][player->position[1]] = ' ';
-                stage->playground[player->position[0]][player->position[1]+1] = 'o';
-                player->position[1] = player->position[1]+1;
-
-                player->score--;
-                player->won = true;
-            } else if (next_position != '#'){
+            if (next_position != '#') {
+                if (next_position == '_') {
+                    player->won = true;
+                }
                 if (next_position == '$') {
                     player->score += 10;
                     scored = true;
