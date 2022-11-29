@@ -11,7 +11,7 @@
 int main(int argc, char **argv) {
     if (argv[1]) {
         if (strcmp(argv[1], "--challenge") == 0) {
-            challenge1();
+            challenge2();
             return 0;
         }
     }

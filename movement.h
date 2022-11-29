@@ -11,7 +11,7 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
 
         if (validate_move(next_position, player) != -1) {
             // aggiorno la posizione
-            stage->playground[player->position[0]][player->position[1]] = ' ';
+            stage->playground[player->position[0]][player->position[1]] = '.';
             stage->playground[player->position[0]][player->position[1]-1] = 'o';
             player->position[1] = player->position[1]-1;
         }
@@ -23,7 +23,7 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
         next_position = stage->playground[player->position[0]+1][player->position[1]];
 
         if (validate_move(next_position, player) != -1) {
-            stage->playground[player->position[0]][player->position[1]] = ' ';
+            stage->playground[player->position[0]][player->position[1]] = '.';
             stage->playground[player->position[0]+1][player->position[1]] = 'o';
             player->position[0] = player->position[0]+1;
         }
@@ -35,7 +35,7 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
         next_position = stage->playground[player->position[0]-1][player->position[1]];
 
         if (validate_move(next_position, player) != -1) {
-            stage->playground[player->position[0]][player->position[1]] = ' ';
+            stage->playground[player->position[0]][player->position[1]] = '.';
             stage->playground[player->position[0]-1][player->position[1]] = 'o';
             player->position[0] = player->position[0]-1;
         }
@@ -47,7 +47,7 @@ void move (char direction, struct labyrinth_stage *stage, struct labyrinth_playe
         next_position = stage->playground[player->position[0]][player->position[1]+1];
 
         if (validate_move(next_position, player) != -1) {
-            stage->playground[player->position[0]][player->position[1]] = ' ';
+            stage->playground[player->position[0]][player->position[1]] = '.';
             stage->playground[player->position[0]][player->position[1]+1] = 'o';
             player->position[1] = player->position[1]+1;
         }
