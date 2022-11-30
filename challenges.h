@@ -1,4 +1,5 @@
 int moves_counter = 0; // contatore delle mosse per le challenge
+
 void store_move(char direction, struct labyrinth_player *player) {
     player->moves_storage[moves_counter] = direction;
     moves_counter++;
@@ -6,10 +7,10 @@ void store_move(char direction, struct labyrinth_player *player) {
 
 }
 
+// aggiro il muro in base alla direzione da cui proviene il bot
 void avoid_wall (char direction, int moves_counter, struct labyrinth_stage *stage_AI, struct labyrinth_player *bot) {
 
     if (direction == bot->left) {
-        printf("funzione chiamata");
         while (stage_AI->playground[bot->position[0]][bot->position[1] - 1] == '#') {
             if (stage_AI->playground[bot->position[0] + 1][bot->position[1]] == '.') {
                 move(bot->up, stage_AI, bot);
@@ -189,6 +190,7 @@ void challenge1() {
 }
 
 void challenge2() {
+    // inizializzo/dichiaro tutto il necessario
     struct labyrinth_stage stage_AI;
     struct labyrinth_player bot;
     scanf("%d", &stage_AI.columns);
@@ -196,10 +198,9 @@ void challenge2() {
     char input[stage_AI.rows];
     int gate[2];
     bool aligned = false;
-    char last_move = '\0';
     bot.moves_storage = malloc(sizeof(char) * 1);
 
-
+    // creo la matrice
     stage_AI.playground = malloc( sizeof *stage_AI.playground * stage_AI.rows);
     if (stage_AI.playground) { // controllo se il malloc è riuscito
         for ( size_t i = 0; i < stage_AI.rows; i++ ) {
@@ -210,6 +211,7 @@ void challenge2() {
         exit(EXIT_FAILURE);
     }
 
+    // inizializzo i campi all'interno della struct
     bot.won = false;
     bot.score = 1000;
     bot.drill = 0;
@@ -218,6 +220,7 @@ void challenge2() {
     bot.up = 'N';
     bot.right = 'E';
 
+    // riempio la matrice e trovo il punto di partenza
     for (int i = 0; i < stage_AI.rows; i++) {
         scanf(" %[^\n]%*c", input);
         for (int j = 0; j < stage_AI.columns; j++) {
@@ -236,25 +239,23 @@ void challenge2() {
         }
     }
 
+    // faccio la prima mossa per uscire dal punto di partenza
     if (bot.position[0] == 0) {
         move(bot.down, &stage_AI, &bot);
-        last_move = bot.down;
+        store_move(bot.down, &bot);
     } else if (bot.position[0] == stage_AI.rows - 1) {
         move(bot.up, &stage_AI, &bot);
-        last_move = bot.up;
+        store_move(bot.up, &bot);
     } else if (bot.position[1] == 0) {
         move(bot.right, &stage_AI, &bot);
-        last_move = bot.right;
+        store_move(bot.right, &bot);
     } else if (bot.position[1] == stage_AI.columns - 1) {
         move(bot.left, &stage_AI, &bot);
-        last_move = bot.left;
+        store_move(bot.left, &bot);
     }
 
-    bot.moves_storage[moves_counter] = last_move;
-    moves_counter++;
-    bot.moves_storage = realloc(bot.moves_storage, (moves_counter + 1) * sizeof(char));
     do {
-
+        // cerco di allinearmi all'uscita, se non ci riesco  e non ho un trapano, aggiro il muro
         while (!aligned) {
             if (bot.position[0] == gate[0] || bot.position[1] == gate[1]) {
                 aligned = true;
@@ -267,13 +268,13 @@ void challenge2() {
                         avoid_wall(bot.right, moves_counter, &stage_AI, &bot);
                     }
                     move(bot.right, &stage_AI, &bot);
-                    last_move = bot.right;
+                    store_move(bot.right, &bot);
                 } else if (bot.position[1] > gate[1]) {
                     if (stage_AI.playground[bot.position[0]][bot.position[1] - 1] == '#' && bot.drill <= 0) {
                         avoid_wall(bot.left, moves_counter, &stage_AI, &bot);
                     }
                     move(bot.left, &stage_AI, &bot);
-                    last_move = bot.left;
+                    store_move(bot.left, &bot);
                 }
             } else {
                 // allineo verticalmente
@@ -282,21 +283,19 @@ void challenge2() {
                         avoid_wall(bot.down, moves_counter, &stage_AI, &bot);
                     }
                     move(bot.down, &stage_AI, &bot);
-                    last_move = bot.down;
+                    store_move(bot.down, &bot);
                 } else if (bot.position[0] > gate[0]) {
                     if (stage_AI.playground[bot.position[0] - 1][bot.position[1]] == '#' && bot.drill <= 0) {
                         avoid_wall(bot.up, moves_counter, &stage_AI, &bot);
                     }
                     move(bot.up, &stage_AI, &bot);
-                    last_move = bot.up;
+                    store_move(bot.up, &bot);
                 }
             }
-            show_stages(true, &stage_AI);
-            bot.moves_storage[moves_counter] = last_move;
-            moves_counter++;
-            bot.moves_storage = realloc(bot.moves_storage, (moves_counter + 1) * sizeof(char));
         };
 
+        // se sono allineato verticalmente o orizzontalmente, vado verso l'uscita
+        // se trovo un muro  e non ho il trapano, lo aggiro
         if (bot.position[0] == gate[0]) {
             if (bot.position[1] < gate[1]) {
                 if (stage_AI.playground[bot.position[0]][bot.position[1] + 1] == '#' && bot.drill <= 0) {
@@ -304,14 +303,14 @@ void challenge2() {
                     aligned = false;
                 }
                 move(bot.right, &stage_AI, &bot);
-                last_move = bot.right;
+                store_move(bot.right, &bot);
             } else {
                 if (stage_AI.playground[bot.position[0]][bot.position[1] - 1] == '#' && bot.drill <= 0) {
                     avoid_wall(bot.left, moves_counter, &stage_AI, &bot);
                     aligned = false;
                 }
                 move(bot.left, &stage_AI, &bot);
-                last_move = bot.left;
+                store_move(bot.left, &bot);
             }
         } else {
             if (bot.position[0] < gate[0]) {
@@ -320,27 +319,27 @@ void challenge2() {
                     aligned = false;
                 }
                 move(bot.down, &stage_AI, &bot);
-                last_move = bot.down;
+                store_move(bot.down, &bot);
             } else {
                 if (stage_AI.playground[bot.position[0] - 1][bot.position[1]] == '#' && bot.drill <= 0) {
                     avoid_wall(bot.up, moves_counter, &stage_AI, &bot);
                     aligned = false;
                 }
                 move(bot.up, &stage_AI, &bot);
-                last_move = bot.up;
+                store_move(bot.up, &bot);
             }
         }
-        show_stages(true, &stage_AI);
-        bot.moves_storage[moves_counter] = last_move;
-        moves_counter++;
-        bot.moves_storage = realloc(bot.moves_storage, (moves_counter + 1) * sizeof(char));
     } while (!bot.won);
 
+    show_stages(true, &stage_AI);
+
+    // stampo le mosse
     for (int i = 0; i < moves_counter; i++) {
         printf("%c",bot.moves_storage[i]);
     }
     printf("\n");
 
+    // libero la memoria allocata
     for ( size_t i = 0; i < stage_AI.rows; i++ ) {
         free(stage_AI.playground[i]);
     }
