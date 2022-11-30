@@ -9,30 +9,51 @@ void store_move(char direction, struct labyrinth_player *player) {
 void avoid_wall (char direction, int moves_counter, struct labyrinth_stage *stage_AI, struct labyrinth_player *bot) {
 
     if (direction == bot->left) {
+        printf("funzione chiamata");
         while (stage_AI->playground[bot->position[0]][bot->position[1] - 1] == '#') {
-            move(bot->down, stage_AI, bot);
-            store_move(bot->down, bot);
+            if (stage_AI->playground[bot->position[0] + 1][bot->position[1]] == '.') {
+                move(bot->up, stage_AI, bot);
+                store_move(bot->up, bot);
+            } else {
+                move(bot->down, stage_AI, bot);
+                store_move(bot->down, bot);
+            }
         }
     }
 
     if (direction == bot->right) {
         while (stage_AI->playground[bot->position[0]][bot->position[1] + 1] == '#') {
-            move(bot->down, stage_AI, bot);
-            store_move(bot->down, bot);
+            if (stage_AI->playground[bot->position[0] + 1][bot->position[1]] == '.') {
+                move(bot->up, stage_AI, bot);
+                store_move(bot->up, bot);
+            } else {
+                move(bot->down, stage_AI, bot);
+                store_move(bot->down, bot);
+            }
         }
     }
 
     if (direction == bot->up) {
         while (stage_AI->playground[bot->position[0] - 1][bot->position[1]] == '#') {
-            move(bot->right, stage_AI, bot);
-            store_move(bot->right, bot);
+            if (stage_AI->playground[bot->position[0]][bot->position[1] + 1] == '.') {
+                move(bot->left, stage_AI, bot);
+                store_move(bot->left, bot);
+            } else {
+                move(bot->right, stage_AI, bot);
+                store_move(bot->right, bot);
+            }
         }
     }
 
     if (direction == bot->down) {
         while (stage_AI->playground[bot->position[0] + 1][bot->position[1]] == '#') {
-            move(bot->right, stage_AI, bot);
-            store_move(bot->right, bot);
+            if (stage_AI->playground[bot->position[0]][bot->position[1] + 1] == '.') {
+                move(bot->left, stage_AI, bot);
+                store_move(bot->left, bot);
+            } else {
+                move(bot->right, stage_AI, bot);
+                store_move(bot->right, bot);
+            }
         }
     }
 
