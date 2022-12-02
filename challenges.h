@@ -7,57 +7,197 @@ void store_move(char direction, struct labyrinth_player *player) {
 
 }
 
-// aggiro il muro in base alla direzione da cui proviene il bot
-void avoid_wall (char direction, int moves_counter, struct labyrinth_stage *stage_AI, struct labyrinth_player *bot) {
-
+int find_best_track (char direction, struct labyrinth_stage *stage_AI, struct labyrinth_player *bot) {
+    int checkpoint[] = {bot->position[0], bot->position[1], bot->score};
+    int track_score;
     if (direction == bot->left) {
         while (stage_AI->playground[bot->position[0]][bot->position[1] - 1] == '#') {
-            if (stage_AI->playground[bot->position[0] + 1][bot->position[1]] == '.') {
+            move(bot->up, stage_AI, bot);
+            stage_AI->playground[bot->position[0] + 1][bot->position[1]] = ' ';
+            if (stage_AI->playground[bot->position[0] - 1][bot->position[1]] == '#') {
+                break;
+            }
+        }
+        track_score = bot->score;
+        bot->score = checkpoint[2];
+        bot->position[0] = checkpoint[0];
+        bot->position[1] = checkpoint[1];
+
+        while (stage_AI->playground[bot->position[0]][bot->position[1] - 1] == '#') {
+            move(bot->down, stage_AI, bot);
+            stage_AI->playground[bot->position[0] - 1][bot->position[1]] = ' ';
+            if (stage_AI->playground[bot->position[0] + 1][bot->position[1]] == '#') {
+                break;
+            }
+        }
+        bot->position[0] = checkpoint[0];
+        bot->position[1] = checkpoint[1];
+
+        if (track_score > bot->score) {
+            bot->score = checkpoint[2];
+            return 1;
+        } else {
+            bot->score = checkpoint[2];
+            return 2;
+        }
+    }
+
+    if (direction == bot->right) {
+        while (stage_AI->playground[bot->position[0]][bot->position[1] + 1] == '#') {
+            move(bot->up, stage_AI, bot);
+            stage_AI->playground[bot->position[0] + 1][bot->position[1]] = ' ';
+            if (stage_AI->playground[bot->position[0] - 1][bot->position[1]] == '#') {
+                break;
+            }
+        }
+        track_score = bot->score;
+        bot->score = checkpoint[2];
+        bot->position[0] = checkpoint[0];
+        bot->position[1] = checkpoint[1];
+
+        while (stage_AI->playground[bot->position[0]][bot->position[1] + 1] == '#') {
+            move(bot->down, stage_AI, bot);
+            stage_AI->playground[bot->position[0] - 1][bot->position[1]] = ' ';
+            if (stage_AI->playground[bot->position[0] + 1][bot->position[1]] == '#') {
+                break;
+            }
+        }
+        bot->position[0] = checkpoint[0];
+        bot->position[1] = checkpoint[1];
+
+        if (track_score > bot->score) {
+            bot->score = checkpoint[2];
+            return 1;
+        } else {
+            bot->score = checkpoint[2];
+            return 2;
+        }
+    }
+
+    if (direction == bot->up) {
+        while (stage_AI->playground[bot->position[0] - 1][bot->position[1]] == '#') {
+            move(bot->left, stage_AI, bot);
+            stage_AI->playground[bot->position[0]][bot->position[1] + 1] = ' ';
+            if (stage_AI->playground[bot->position[0]][bot->position[1] - 1] == '#') {
+                break;
+            }
+        }
+        track_score = bot->score;
+        bot->score = checkpoint[2];
+        bot->position[0] = checkpoint[0];
+        bot->position[1] = checkpoint[1];
+
+        while (stage_AI->playground[bot->position[0] - 1][bot->position[1]] == '#') {
+            move(bot->right, stage_AI, bot);
+            stage_AI->playground[bot->position[0]][bot->position[1] - 1] = ' ';
+            if (stage_AI->playground[bot->position[0]][bot->position[1] + 1] == '#') {
+                break;
+            }
+        }
+        bot->position[0] = checkpoint[0];
+        bot->position[1] = checkpoint[1];
+
+        if (track_score > bot->score) {
+            bot->score = checkpoint[2];
+            return 1;
+        } else {
+            bot->score = checkpoint[2];
+            return 2;
+        }
+    }
+
+    if (direction == bot->down) {
+        while (stage_AI->playground[bot->position[0] + 1][bot->position[1]] == '#') {
+            move(bot->left, stage_AI, bot);
+            stage_AI->playground[bot->position[0]][bot->position[1] + 1] = ' ';
+            if (stage_AI->playground[bot->position[0]][bot->position[1] - 1] == '#') {
+                break;
+            }
+        }
+        track_score = bot->score;
+        bot->score = checkpoint[2];
+        bot->position[0] = checkpoint[0];
+        bot->position[1] = checkpoint[1];
+
+        while (stage_AI->playground[bot->position[0] + 1][bot->position[1]] == '#') {
+            move(bot->right, stage_AI, bot);
+            stage_AI->playground[bot->position[0]][bot->position[1] - 1] = ' ';
+            if (stage_AI->playground[bot->position[0]][bot->position[1] + 1] == '#') {
+                break;
+            }
+        }
+        bot->position[0] = checkpoint[0];
+        bot->position[1] = checkpoint[1];
+
+        if (track_score > bot->score) {
+            bot->score = checkpoint[2];
+            return 1;
+        } else {
+            bot->score = checkpoint[2];
+            return 2;
+        }
+    }
+
+    return 1;
+}
+// aggiro il muro in base alla direzione da cui proviene il bot
+void avoid_wall (char direction, int moves_counter, struct labyrinth_stage *stage_AI, struct labyrinth_player *bot) {
+    int choice = 0;
+    if (direction == bot->left) {
+        while (stage_AI->playground[bot->position[0]][bot->position[1] - 1] == '#') {
+            if (stage_AI->playground[bot->position[0] + 1][bot->position[1]] == '.' || choice == 1) {
                 move(bot->up, stage_AI, bot);
                 store_move(bot->up, bot);
-            } else {
+            } else if (stage_AI->playground[bot->position[0] - 1][bot->position[1]] == '.' || choice == 2){
                 move(bot->down, stage_AI, bot);
                 store_move(bot->down, bot);
+            } else {
+                choice = find_best_track(direction, stage_AI, bot);
             }
         }
     }
 
     if (direction == bot->right) {
         while (stage_AI->playground[bot->position[0]][bot->position[1] + 1] == '#') {
-            if (stage_AI->playground[bot->position[0] + 1][bot->position[1]] == '.') {
+            if (stage_AI->playground[bot->position[0] + 1][bot->position[1]] == '.' || choice == 1) {
                 move(bot->up, stage_AI, bot);
                 store_move(bot->up, bot);
-            } else {
+            } else if (stage_AI->playground[bot->position[0] - 1][bot->position[1]] == '.' || choice == 2) {
                 move(bot->down, stage_AI, bot);
                 store_move(bot->down, bot);
+            } else {
+                choice = find_best_track(direction, stage_AI, bot);
             }
         }
     }
 
     if (direction == bot->up) {
         while (stage_AI->playground[bot->position[0] - 1][bot->position[1]] == '#') {
-            if (stage_AI->playground[bot->position[0]][bot->position[1] + 1] == '.') {
+            if (stage_AI->playground[bot->position[0]][bot->position[1] + 1] == '.' || choice == 1) {
                 move(bot->left, stage_AI, bot);
                 store_move(bot->left, bot);
-            } else {
+            } else if (stage_AI->playground[bot->position[0]][bot->position[1] - 1] == '.' || choice == 2) {
                 move(bot->right, stage_AI, bot);
                 store_move(bot->right, bot);
+            } else {
+                choice = find_best_track(direction, stage_AI, bot);
             }
         }
     }
 
     if (direction == bot->down) {
         while (stage_AI->playground[bot->position[0] + 1][bot->position[1]] == '#') {
-            if (stage_AI->playground[bot->position[0]][bot->position[1] + 1] == '.') {
+            if (stage_AI->playground[bot->position[0]][bot->position[1] + 1] == '.' || choice == 1) {
                 move(bot->left, stage_AI, bot);
                 store_move(bot->left, bot);
-            } else {
+            } else if (stage_AI->playground[bot->position[0]][bot->position[1] - 1] == '.' || choice == 2) {
                 move(bot->right, stage_AI, bot);
                 store_move(bot->right, bot);
+            } else {
+                choice = find_best_track(direction, stage_AI, bot);
             }
         }
     }
-
 }
 
 void challenge1() {
@@ -330,8 +470,6 @@ void challenge2() {
             }
         }
     } while (!bot.won);
-
-    show_stages(true, &stage_AI);
 
     // stampo le mosse
     for (int i = 0; i < moves_counter; i++) {
