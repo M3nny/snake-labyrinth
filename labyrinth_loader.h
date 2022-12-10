@@ -14,9 +14,27 @@ struct labyrinth_player {
     int drill;
 };
 
+void show_tail(vector *tail, struct labyrinth_stage *stage) {
+    if (tail == NULL) {
+        return;
+    }
+    stage->playground[tail->rows][tail->columns] = 'x';
+    show_tail(tail->next, stage);
+}
+
+void delete_old_tail(struct labyrinth_stage *stage) {
+    for (int i = 0; i < stage->rows; i++) {
+        for (int j = 0; j < stage->columns; j++) {
+            if (stage->playground[i][j] == 'x') {
+                stage->playground[i][j] = ' ';
+            }
+        }
+    }
+}
+
 // se il livello deve ancora essere selezionato stampo tutto il file
 // altrimenti stampo il livello caricato in memoria
-void show_stages(bool loaded, struct labyrinth_stage *stage) {
+void show_stages(bool loaded, vector *tail, struct labyrinth_stage *stage) {
     if (!loaded) {
         FILE* file = fopen("labyrinth.txt", "r");
 
@@ -32,6 +50,8 @@ void show_stages(bool loaded, struct labyrinth_stage *stage) {
         }
         fclose(file);
     } else {
+        delete_old_tail(stage);
+        show_tail(tail, stage);
         for (int i = 0; i < stage->rows; i++) {
             for (int j = 0; j < stage->columns; j++) {
                 printf("%c", stage->playground[i][j]);
@@ -40,6 +60,7 @@ void show_stages(bool loaded, struct labyrinth_stage *stage) {
         }
     }
 }
+
 
 void load_game (const char *labyrinth_stage, struct labyrinth_stage *stage, struct labyrinth_player *player) {
     FILE* file = fopen("labyrinth.txt", "r");

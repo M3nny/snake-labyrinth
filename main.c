@@ -4,19 +4,21 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
+#include "tail.h"
 #include "labyrinth_loader.h"
 #include "movement.h"
-#include "challenges.h"
+//#include "challenges.h"
 
 int main(int argc, char **argv) {
     if (argv[1]) {
         if (strcmp(argv[1], "--challenge") == 0) {
-            challenge2();
+            //challenge2();
             return 0;
         }
     }
     struct labyrinth_stage stage;
     struct labyrinth_player player;
+    vector *tail = NULL;
 
     char selected_stage[2] = "x\n";
     int mode;
@@ -32,7 +34,7 @@ int main(int argc, char **argv) {
         printf("(input modalità): ");
         scanf("%d", &mode);
     } while (mode != 1 && mode != 2);
-    show_stages(false, &stage);
+    show_stages(false, tail, &stage);
 
     do {
         printf("\nSeleziona una mappa (1 - 2 - 3)\n");
@@ -43,7 +45,10 @@ int main(int argc, char **argv) {
     load_game(selected_stage, &stage, &player);
     clear();
     printf("Mappa selezionata:\n");
-    show_stages(true, &stage);
+    show_stages(true, tail, &stage);
+
+
+
 
     do {
         do {
@@ -66,9 +71,9 @@ int main(int argc, char **argv) {
                         break;
                 }
             }
-            move(direction, &stage, &player);
-            clear();
-            show_stages(true, &stage);
+            move(direction, &tail, &stage, &player);
+            //clear();
+            show_stages(true, tail, &stage);
 
             player.moves_storage[moves_counter] = direction;
             moves_counter++;
