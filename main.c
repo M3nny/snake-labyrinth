@@ -47,9 +47,6 @@ int main(int argc, char **argv) {
     printf("Mappa selezionata:\n");
     show_stages(true, tail, &stage);
 
-
-
-
     do {
         do {
             if (mode == 1) {

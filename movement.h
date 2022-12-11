@@ -1,15 +1,19 @@
-int validate_move (char next_position, vector **tail, struct labyrinth_player *player);
+int validate_move (char next_position, int *next_coordinates, vector **tail, struct labyrinth_player *player);
 
 void move (char direction, vector **tail, struct labyrinth_stage *stage, struct labyrinth_player *player) {
     char next_position;
+    int next_coordinates[2];
+
     if (direction == player->left) {
         // prima di effettuare altri controlli, guardo se la mossa mi fa andare fuori dal labirinto
         if (player->position[1]-1 < 0) {
             return;
         }
         next_position = stage->playground[player->position[0]][player->position[1]-1];
+        next_coordinates[0] = player->position[0];
+        next_coordinates[1] = player->position[1]-1;
 
-        if (validate_move(next_position, tail, player) != -1) {
+        if (validate_move(next_position, next_coordinates, tail, player) != -1) {
             // aggiorno la posizione
             stage->playground[player->position[0]][player->position[1]] = '.';
             stage->playground[player->position[0]][player->position[1]-1] = 'o';
@@ -21,8 +25,10 @@ void move (char direction, vector **tail, struct labyrinth_stage *stage, struct 
             return;
         }
         next_position = stage->playground[player->position[0]+1][player->position[1]];
+        next_coordinates[0] = player->position[0]+1;
+        next_coordinates[1] = player->position[1];
 
-        if (validate_move(next_position, tail, player) != -1) {
+        if (validate_move(next_position, next_coordinates, tail, player) != -1) {
             stage->playground[player->position[0]][player->position[1]] = '.';
             stage->playground[player->position[0]+1][player->position[1]] = 'o';
             player->position[0] = player->position[0]+1;
@@ -33,8 +39,10 @@ void move (char direction, vector **tail, struct labyrinth_stage *stage, struct 
             return;
         }
         next_position = stage->playground[player->position[0]-1][player->position[1]];
+        next_coordinates[0] = player->position[0]-1;
+        next_coordinates[1] = player->position[1];
 
-        if (validate_move(next_position, tail, player) != -1) {
+        if (validate_move(next_position, next_coordinates, tail, player) != -1) {
             stage->playground[player->position[0]][player->position[1]] = '.';
             stage->playground[player->position[0]-1][player->position[1]] = 'o';
             player->position[0] = player->position[0]-1;
@@ -45,8 +53,10 @@ void move (char direction, vector **tail, struct labyrinth_stage *stage, struct 
             return;
         }
         next_position = stage->playground[player->position[0]][player->position[1]+1];
+        next_coordinates[0] = player->position[0];
+        next_coordinates[1] = player->position[1]+1;
 
-        if (validate_move(next_position, tail, player) != -1) {
+        if (validate_move(next_position, next_coordinates, tail, player) != -1) {
             stage->playground[player->position[0]][player->position[1]] = '.';
             stage->playground[player->position[0]][player->position[1]+1] = 'o';
             player->position[1] = player->position[1]+1;
@@ -68,7 +78,7 @@ void move_tail(vector **tail, int rows, int columns) {
     move_tail(&((*tail)->next), rows, columns);
 }
 
-int validate_move (char next_position, vector **tail, struct labyrinth_player *player) {
+int validate_move (char next_position, int *next_coordinates, vector **tail, struct labyrinth_player *player) {
     int scored = 0;
     if (next_position != '#' || (next_position == '#' && player->drill > 0)) { // se la prossima cella non è un muro valuto tutte le possibili opzioni
         if (next_position == '$') { // punti bonus
@@ -80,7 +90,18 @@ int validate_move (char next_position, vector **tail, struct labyrinth_player *p
                 player->won = true;
             }
             if (next_position == '!') { // punti dimezzati
+                int snake_length = get_tail_length(*tail) ;
+                for (int i = 0; i < snake_length/2; i++) { // dimezzo la lunghezza della coda di snake
+                    pop(tail);
+                }
                 player->score /= 2;
+                scored = 1;
+            }
+            if (next_position == 'x') {
+                int index = get_node_index(*tail, next_coordinates[0], next_coordinates[1]);
+                for (int i = 0; i < index; i++) {
+                    pop(tail);
+                }
                 scored = 1;
             }
             if (next_position == 'T') {
