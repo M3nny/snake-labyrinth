@@ -7,12 +7,12 @@
 #include "tail.h"
 #include "labyrinth_loader.h"
 #include "movement.h"
-//#include "challenges.h"
+#include "challenges.h"
 
 int main(int argc, char **argv) {
     if (argv[1]) {
         if (strcmp(argv[1], "--challenge") == 0) {
-            //challenge2();
+            challenge2();
             return 0;
         }
     }
@@ -72,7 +72,7 @@ int main(int argc, char **argv) {
                 }
             }
             move(direction, &tail, &stage, &player);
-            //clear();
+            clear();
             show_stages(true, tail, &stage);
 
             player.moves_storage[moves_counter] = direction;
