@@ -101,6 +101,7 @@ int validate_move (char next_position, int *next_coordinates, vector **tail, str
                 int index = get_node_index(*tail, next_coordinates[0], next_coordinates[1]);
                 for (int i = 0; i < index; i++) {
                     pop(tail);
+                    player->score -= 10;
                 }
                 scored = 1;
             }
