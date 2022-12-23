@@ -1,6 +1,6 @@
-int validate_move (char next_position, int *next_coordinates, vector **tail, struct labyrinth_player *player);
+int validate_move (char next_position, int *next_coordinates, vector **tail, labyrinth_player *player);
 
-void move (char direction, vector **tail, struct labyrinth_stage *stage, struct labyrinth_player *player) {
+void move (char direction, vector **tail, labyrinth_stage *stage, labyrinth_player *player) {
     char next_position;
     int next_coordinates[2];
 
@@ -78,7 +78,7 @@ void move_tail(vector **tail, int rows, int columns) {
     move_tail(&((*tail)->next), rows, columns);
 }
 
-int validate_move (char next_position, int *next_coordinates, vector **tail, struct labyrinth_player *player) {
+int validate_move (char next_position, int *next_coordinates, vector **tail, labyrinth_player *player) {
     int scored = 0;
     if (next_position != '#' || (next_position == '#' && player->drill > 0)) { // se la prossima cella non è un muro valuto tutte le possibili opzioni
         if (next_position == '$') { // punti bonus

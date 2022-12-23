@@ -1,14 +1,14 @@
 int moves_counter = 0; // contatore delle mosse per le challenge
 
 
-void store_move(char direction, struct labyrinth_player *player) {
+void store_move(char direction, labyrinth_player *player) {
     player->moves_storage[moves_counter] = direction;
     moves_counter++;
     player->moves_storage = realloc(player->moves_storage, (moves_counter + 1) * sizeof(char));
 
 }
 
-int find_best_track (char direction, vector **tail, struct labyrinth_stage *stage_AI, struct labyrinth_player *bot) {
+int find_best_track (char direction, vector **tail, labyrinth_stage *stage_AI, labyrinth_player *bot) {
     int checkpoint[] = {bot->position[0], bot->position[1], bot->score};
     int track_score;
     if (direction == bot->left) {
@@ -142,7 +142,7 @@ int find_best_track (char direction, vector **tail, struct labyrinth_stage *stag
     return 1;
 }
 // aggiro il muro in base alla direzione da cui proviene il bot
-void avoid_wall (char direction, int moves_counter, vector **tail, struct labyrinth_stage *stage_AI, struct labyrinth_player *bot) {
+void avoid_wall (char direction, int moves_counter, vector **tail, labyrinth_stage *stage_AI, labyrinth_player *bot) {
     int choice = 0;
     if (direction == bot->left) {
         while (stage_AI->playground[bot->position[0]][bot->position[1] - 1] == '#') {
@@ -202,8 +202,8 @@ void avoid_wall (char direction, int moves_counter, vector **tail, struct labyri
 }
 
 void challenge1() {
-    struct labyrinth_stage stage_AI;
-    struct labyrinth_player bot;
+    labyrinth_stage stage_AI;
+    labyrinth_player bot;
     vector *tail = NULL;
 
     scanf("%d", &stage_AI.columns);
@@ -335,8 +335,8 @@ void challenge1() {
 
 void challenge2() {
     // inizializzo/dichiaro tutto il necessario
-    struct labyrinth_stage stage_AI;
-    struct labyrinth_player bot;
+    labyrinth_stage stage_AI;
+    labyrinth_player bot;
     vector *tail = NULL;
 
     scanf("%d", &stage_AI.columns);

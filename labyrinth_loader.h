@@ -1,10 +1,11 @@
-struct labyrinth_stage {
+typedef struct {
     char **playground; // contiene il livello
     int rows; // righe del labirinto
     int columns; // colonne del labirinto
-};
+} labyrinth_stage;
 
-struct labyrinth_player {
+
+typedef struct {
     int position[2]; // position[0] è la riga attuale, position[1] è la colonna attuale
     int origin[2];
     bool won; // flag per vedere se il giocatore ha vinto
@@ -12,9 +13,9 @@ struct labyrinth_player {
     int score; // tiene conto del punteggio
     char left, up, down, right;
     int drill;
-};
+} labyrinth_player;
 
-void show_tail(vector *tail, struct labyrinth_stage *stage) {
+void show_tail(vector *tail, labyrinth_stage *stage) {
     if (tail == NULL) {
         return;
     }
@@ -22,7 +23,7 @@ void show_tail(vector *tail, struct labyrinth_stage *stage) {
     show_tail(tail->next, stage);
 }
 
-void delete_old_tail(struct labyrinth_stage *stage) {
+void delete_old_tail(labyrinth_stage *stage) {
     for (int i = 0; i < stage->rows; i++) {
         for (int j = 0; j < stage->columns; j++) {
             if (stage->playground[i][j] == 'x') {
@@ -34,7 +35,7 @@ void delete_old_tail(struct labyrinth_stage *stage) {
 
 // se il livello deve ancora essere selezionato stampo tutto il file
 // altrimenti stampo il livello caricato in memoria
-void show_stages(bool loaded, vector *tail, struct labyrinth_stage *stage) {
+void show_stages(bool loaded, vector *tail, labyrinth_stage *stage) {
     if (!loaded) {
         FILE* file = fopen("labyrinth.txt", "r");
 
@@ -62,7 +63,7 @@ void show_stages(bool loaded, vector *tail, struct labyrinth_stage *stage) {
 }
 
 
-void load_game (const char *labyrinth_stage, struct labyrinth_stage *stage, struct labyrinth_player *player) {
+void load_game (const char *stage_no, labyrinth_stage *stage, labyrinth_player *player) {
     FILE* file = fopen("labyrinth.txt", "r");
 
     if(!file) {
@@ -81,9 +82,10 @@ void load_game (const char *labyrinth_stage, struct labyrinth_stage *stage, stru
     player->up = 'k';
     player->down = 'j';
     player->right = 'l';
+    player->moves_storage = malloc(sizeof(char) * 1);
 
     while (fgets(line, sizeof(line), file)) { // leggo tutto il file e stoppo il ciclo dopo aver letto il labirinto
-        if ((strcmp(line, labyrinth_stage)) == 0) { // se trovo il numero corrispondente al labirinto comincio a leggerlo
+        if ((strcmp(line, stage_no)) == 0) { // se trovo il numero corrispondente al labirinto comincio a leggerlo
             selected = true;
             while (fgets(line, sizeof(line), file)) { // leggo il labirinto finchè non trovo end
                 if ((strcmp(line, "end\n")) == 0) {
@@ -118,7 +120,7 @@ void load_game (const char *labyrinth_stage, struct labyrinth_stage *stage, stru
     selected = false;
 
     while (fgets(line, sizeof(line), file)) { // leggo tutto il file e stoppo il ciclo dopo aver letto il labirinto
-        if ((strcmp(line, labyrinth_stage)) == 0) { // se trovo il numero corrispondente al labirinto comincio a leggerlo
+        if ((strcmp(line, stage_no)) == 0) { // se trovo il numero corrispondente al labirinto comincio a leggerlo
             selected = true;
 
             // metto dentro alla matrice tutti gli elementi che non sono \n

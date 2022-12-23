@@ -16,17 +16,15 @@ int main(int argc, char **argv) {
             return 0;
         }
     }
-    struct labyrinth_stage stage;
-    struct labyrinth_player player;
+    labyrinth_stage stage;
+    labyrinth_player player;
     vector *tail = NULL;
 
     char selected_stage[2] = "x\n";
     int mode;
     char direction;
     int moves_counter = 0;
-    srand (time(NULL));
-
-    player.moves_storage = malloc(sizeof(char) * 1);
+    srand(time(NULL));
 
     printf("Benvenuto su snake labyrinth\n");
     do {
