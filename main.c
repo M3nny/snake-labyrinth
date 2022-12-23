@@ -12,7 +12,7 @@
 int main(int argc, char **argv) {
     if (argv[1]) {
         if (strcmp(argv[1], "--challenge") == 0) {
-            challenge2();
+            challenge();
             return 0;
         }
     }
@@ -69,18 +69,15 @@ int main(int argc, char **argv) {
             move(direction, &tail, &stage, &player);
             clear();
             show_stages(true, tail, &stage);
-
-            player.moves_storage[moves_counter] = direction;
-            moves_counter++;
-            player.moves_storage = realloc(player.moves_storage, (moves_counter + 1) * sizeof(char));
+            store_move(direction, &player);
 
             printf("Punteggio: %d\n", player.score);
-        } while (direction != 'h' && direction != 'j' && direction != 'k' && direction != 'l');
+        } while (direction != player.left && direction != player.down && direction != player.up && direction != player.right);
     } while (!player.won);
     printf("Hai vinto!\n");
 
     printf("Elenco delle mosse eseguite: ");
-    for (int i = 0; i < moves_counter; i++) {
+    for (int i = 0; i < player.moves_counter; i++) {
         printf("%c",player.moves_storage[i]);
     }
     printf("\n");
@@ -93,4 +90,3 @@ int main(int argc, char **argv) {
 
     return 0;
 }
-

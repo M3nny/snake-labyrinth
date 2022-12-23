@@ -10,6 +10,7 @@ typedef struct {
     int origin[2];
     bool won; // flag per vedere se il giocatore ha vinto
     char *moves_storage;
+    int moves_counter;
     int score; // tiene conto del punteggio
     char left, up, down, right;
     int drill;
@@ -83,6 +84,7 @@ void load_game (const char *stage_no, labyrinth_stage *stage, labyrinth_player *
     player->down = 'j';
     player->right = 'l';
     player->moves_storage = malloc(sizeof(char) * 1);
+    player->moves_counter = 0;
 
     while (fgets(line, sizeof(line), file)) { // leggo tutto il file e stoppo il ciclo dopo aver letto il labirinto
         if ((strcmp(line, stage_no)) == 0) { // se trovo il numero corrispondente al labirinto comincio a leggerlo
@@ -144,6 +146,12 @@ void load_game (const char *stage_no, labyrinth_stage *stage, labyrinth_player *
             break;
         }
     }
+}
+
+void store_move(char direction, labyrinth_player *player) {
+    player->moves_storage[player->moves_counter] = direction;
+    player->moves_counter++;
+    player->moves_storage = realloc(player->moves_storage, (player->moves_counter + 1) * sizeof(char));
 }
 
 void clear () {
