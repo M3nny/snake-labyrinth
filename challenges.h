@@ -1,20 +1,22 @@
-int find_best_track (char direction, vector **tail, labyrinth_stage *stage_AI, labyrinth_player *bot) {
-    int checkpoint[] = {bot->position[0], bot->position[1], bot->score};
+int find_best_track(char direction, vector **tail, labyrinth_stage *stage_AI, labyrinth_player *bot) {
+    int checkpoint[] = {bot->position[0], bot->position[1], bot->score}; // prima di provare ad aggirare il muro in entrambre le direzioni, mi salvo lo stato attuale di snake al momento in cui trova il muro
     int track_score;
-    if (direction == bot->left) {
-        while (stage_AI->playground[bot->position[0]][bot->position[1] - 1] == '#') {
+
+    if (direction == bot->left) { // se incontro il muro da sinistra
+        while (stage_AI->playground[bot->position[0]][bot->position[1] - 1] == '#') { // controllo che punteggio ottengo aggirando il muro andando in su
             move(bot->up, tail, stage_AI, bot);
             stage_AI->playground[bot->position[0] + 1][bot->position[1]] = ' ';
             if (stage_AI->playground[bot->position[0] - 1][bot->position[1]] == '#') {
                 break;
             }
         }
-        track_score = bot->score;
+        track_score = bot->score; // tengo conto del punteggio ottenuto aggirando il muro andando verso su
+        // resetto la posizione di snake a dove era prima di aggirare il muro
         bot->score = checkpoint[2];
         bot->position[0] = checkpoint[0];
         bot->position[1] = checkpoint[1];
 
-        while (stage_AI->playground[bot->position[0]][bot->position[1] - 1] == '#') {
+        while (stage_AI->playground[bot->position[0]][bot->position[1] - 1] == '#') { // controllo che punteggio ottengo aggirando il muro andando in giù
             move(bot->down, tail, stage_AI, bot);
             stage_AI->playground[bot->position[0] - 1][bot->position[1]] = ' ';
             if (stage_AI->playground[bot->position[0] + 1][bot->position[1]] == '#') {
@@ -24,7 +26,7 @@ int find_best_track (char direction, vector **tail, labyrinth_stage *stage_AI, l
         bot->position[0] = checkpoint[0];
         bot->position[1] = checkpoint[1];
 
-        if (track_score > bot->score) {
+        if (track_score > bot->score) { // se andare in su mi ha generato un punteggio maggiore di andare in giù, allora dico che la scelta da fare è andare su
             bot->score = checkpoint[2];
             return 1;
         } else {
@@ -132,10 +134,11 @@ int find_best_track (char direction, vector **tail, labyrinth_stage *stage_AI, l
     return 1;
 }
 // aggiro il muro in base alla direzione da cui proviene il bot
-void avoid_wall (char direction, vector **tail, labyrinth_stage *stage_AI, labyrinth_player *bot) {
+void avoid_wall(char direction, vector **tail, labyrinth_stage *stage_AI, labyrinth_player *bot) {
     int choice = 0;
-    if (direction == bot->left) {
-        while (stage_AI->playground[bot->position[0]][bot->position[1] - 1] == '#') {
+    if (direction == bot->left) { // se incontro il muro da sinistra
+        while (stage_AI->playground[bot->position[0]][bot->position[1] - 1] == '#') { // finchè a sinistra ho il muro
+            // se sono arrivato da sotto oppure la strada più breve è andare su allora vado su
             if (stage_AI->playground[bot->position[0] + 1][bot->position[1]] == '.' || stage_AI->playground[bot->position[0] + 1][bot->position[1]] == 'x' || choice == 1) {
                 move(bot->up, tail, stage_AI, bot);
                 store_move(bot->up, bot);
