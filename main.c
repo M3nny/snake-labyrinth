@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
 
     char selected_stage[2] = "x\n";
     int mode;
-    char direction;
+    char direction, show_moves;
     int moves_counter = 0;
     srand(time(NULL));
 
@@ -67,20 +67,26 @@ int main(int argc, char **argv) {
                 }
             }
             move(direction, &tail, &stage, &player);
+            store_move(direction, &player);
             clear();
             show_stages(true, tail, &stage);
-            store_move(direction, &player);
 
             printf("Punteggio: %d\n", player.score);
         } while (direction != player.left && direction != player.down && direction != player.up && direction != player.right);
     } while (!player.won);
-    printf("Hai vinto!\n");
+    printf("Hai vinto!\nDesideri vedere le mosse eseguite?(s/n) ");
 
-    printf("Elenco delle mosse eseguite: ");
-    for (int i = 0; i < player.moves_counter; i++) {
-        printf("%c",player.moves_storage[i]);
+    do {
+        scanf(" %c", &show_moves);
+    } while (show_moves != 's' && show_moves != 'n');
+
+    if (show_moves == 's') {
+        printf("Elenco delle mosse eseguite: ");
+        for (int i = 0; i < player.moves_counter; i++) {
+            printf("%c",player.moves_storage[i]);
+        }
+        printf("\n");
     }
-    printf("\n");
 
     for ( size_t i = 0; i < stage.rows; i++ ) {
         free(stage.playground[i]);

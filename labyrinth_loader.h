@@ -7,7 +7,6 @@ typedef struct {
 
 typedef struct {
     int position[2]; // position[0] è la riga attuale, position[1] è la colonna attuale
-    int origin[2];
     bool won; // flag per vedere se il giocatore ha vinto
     char *moves_storage;
     int moves_counter;
@@ -132,8 +131,6 @@ void load_game (const char *stage_no, labyrinth_stage *stage, labyrinth_player *
                         c = fgetc(file);
                         stage->playground[i][j] = c;
                         if (c == 'o') {
-                            player->origin[0] = i;
-                            player->origin[1] = j;
                             player->position[0] = i;
                             player->position[1] = j;
                         }

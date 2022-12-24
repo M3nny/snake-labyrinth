@@ -14,7 +14,7 @@ void move (char direction, vector **tail, labyrinth_stage *stage, labyrinth_play
         next_coordinates[1] = player->position[1]-1;
 
         if (validate_move(next_position, next_coordinates, tail, player) != -1) {
-            // aggiorno la posizione
+            // aggiorno la posizione, se la coda non è presente, verrà visualizzato un . come traccia del percorso fatto
             stage->playground[player->position[0]][player->position[1]] = '.';
             stage->playground[player->position[0]][player->position[1]-1] = 'o';
             player->position[1] = player->position[1]-1;
@@ -62,6 +62,7 @@ void move (char direction, vector **tail, labyrinth_stage *stage, labyrinth_play
             player->position[1] = player->position[1]+1;
         }
     }
+    show_stages(true, *tail, stage);
 }
 
 void move_tail(vector **tail, int rows, int columns) {
@@ -75,7 +76,7 @@ void move_tail(vector **tail, int rows, int columns) {
     }
     (*tail)->rows = ((*tail)->next)->rows;
     (*tail)->columns = ((*tail)->next)->columns;
-    move_tail(&((*tail)->next), rows, columns);
+    move_tail(&(*tail)->next, rows, columns);
 }
 
 int validate_move (char next_position, int *next_coordinates, vector **tail, labyrinth_player *player) {
