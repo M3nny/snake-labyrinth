@@ -200,12 +200,22 @@ void challenge() {
     labyrinth_player bot;
     vector *tail = NULL;
 
+    // inizializzo i campi all'interno della struct
+    bot.won = false;
+    bot.score = 1000;
+    bot.drill = 0;
+    bot.left = 'O';
+    bot.down = 'S';
+    bot.up = 'N';
+    bot.right = 'E';
+    bot.moves_storage = malloc(sizeof(char) * 1);
+    bot.moves_counter = 0;
+
     scanf("%d", &stage_AI.columns);
     scanf("%d", &stage_AI.rows);
     char input[stage_AI.rows];
     int gate[2];
     bool aligned = false;
-    bot.moves_storage = malloc(sizeof(char) * 1);
 
     // creo la matrice
     stage_AI.playground = malloc( sizeof *stage_AI.playground * stage_AI.rows);
@@ -217,15 +227,6 @@ void challenge() {
         printf("Caricamento del livello non riuscito\n");
         exit(EXIT_FAILURE);
     }
-
-    // inizializzo i campi all'interno della struct
-    bot.won = false;
-    bot.score = 1000;
-    bot.drill = 0;
-    bot.left = 'O';
-    bot.down = 'S';
-    bot.up = 'N';
-    bot.right = 'E';
 
     // riempio la matrice e trovo il punto di partenza
     for (int i = 0; i < stage_AI.rows; i++) {

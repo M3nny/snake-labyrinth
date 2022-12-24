@@ -65,9 +65,9 @@ void show_stages(bool loaded, vector *tail, labyrinth_stage *stage) {
 
 void load_game(const char *stage_no, int method, labyrinth_stage *stage, labyrinth_player *player) {
 
-    player->drill = 0;
     player->won = false;
     player->score = 1000;
+    player->drill = 0;
     player->left = 'h';
     player->up = 'k';
     player->down = 'j';
