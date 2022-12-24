@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['tail_33',['tail',['../structtail.html',1,'']]],
-  ['tail_2eh_34',['tail.h',['../tail_8h.html',1,'']]]
+  ['score_31',['score',['../structlabyrinth__player.html#a7fa474df7f512d9aa6a4b2b2092a728f',1,'labyrinth_player']]],
+  ['show_5fstages_32',['show_stages',['../game__manager_8h.html#a8774de8432ee74b6eeca1e1761b0866a',1,'game_manager.h']]],
+  ['show_5ftail_33',['show_tail',['../game__manager_8h.html#a7b470dd25392cdec0a4691b44fc4ac4a',1,'game_manager.h']]],
+  ['store_5fmove_34',['store_move',['../game__manager_8h.html#a6570cf68c53df208850d167f33630397',1,'game_manager.h']]]
 ];

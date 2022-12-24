@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['rows_74',['rows',['../structlabyrinth__stage.html#af7e92c96b211b09c13aa3c71a6d52039',1,'labyrinth_stage']]]
+  ['playground_75',['playground',['../structlabyrinth__stage.html#a8325a4e83af0a1bbf1fa5115ad5e7bd9',1,'labyrinth_stage']]],
+  ['position_76',['position',['../structlabyrinth__player.html#a840f27e20ca89a2c262535ba7975030b',1,'labyrinth_player']]]
 ];

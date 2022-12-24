@@ -81,14 +81,14 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ac48e1472147153ece97ea38e8ef46100"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#ac48e1472147153ece97ea38e8ef46100">validate_move</a> (char next_position, int *next_coordinates, <a class="el" href="tail_8h.html#aac0872e4588fecaa90c72d2f3b1382b3">vector</a> **<a class="el" href="structtail.html">tail</a>, <a class="el" href="structlabyrinth__player.html">labyrinth_player</a> *player)</td></tr>
-<tr class="memdesc:ac48e1472147153ece97ea38e8ef46100"><td class="mdescLeft">&#160;</td><td class="mdescRight">gestisce i vari casi che si possono verificare prima di muovere effettivamente snake  <a href="movement_8h.html#ac48e1472147153ece97ea38e8ef46100">More...</a><br /></td></tr>
+<tr class="memdesc:ac48e1472147153ece97ea38e8ef46100"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gestisce i vari casi che si possono verificare prima di muovere effettivamente snake.  <a href="movement_8h.html#ac48e1472147153ece97ea38e8ef46100">More...</a><br /></td></tr>
 <tr class="separator:ac48e1472147153ece97ea38e8ef46100"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab64d78df1fe4fa8320f7bbdcc4e8cbe6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#ab64d78df1fe4fa8320f7bbdcc4e8cbe6">move</a> (char direction, <a class="el" href="tail_8h.html#aac0872e4588fecaa90c72d2f3b1382b3">vector</a> **<a class="el" href="structtail.html">tail</a>, <a class="el" href="structlabyrinth__stage.html">labyrinth_stage</a> *stage, <a class="el" href="structlabyrinth__player.html">labyrinth_player</a> *player)</td></tr>
-<tr class="memdesc:ab64d78df1fe4fa8320f7bbdcc4e8cbe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">muove la testa di snake  <a href="movement_8h.html#ab64d78df1fe4fa8320f7bbdcc4e8cbe6">More...</a><br /></td></tr>
+<tr class="memdesc:ab64d78df1fe4fa8320f7bbdcc4e8cbe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Muove la testa di snake.  <a href="movement_8h.html#ab64d78df1fe4fa8320f7bbdcc4e8cbe6">More...</a><br /></td></tr>
 <tr class="separator:ab64d78df1fe4fa8320f7bbdcc4e8cbe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7938a7902314c161bce2fd5d96bb5209"><td class="memItemLeft" align="right" valign="top"><a id="a7938a7902314c161bce2fd5d96bb5209"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8h.html#a7938a7902314c161bce2fd5d96bb5209">move_tail</a> (<a class="el" href="tail_8h.html#aac0872e4588fecaa90c72d2f3b1382b3">vector</a> **<a class="el" href="structtail.html">tail</a>, int rows, int columns)</td></tr>
-<tr class="memdesc:a7938a7902314c161bce2fd5d96bb5209"><td class="mdescLeft">&#160;</td><td class="mdescRight">muove la coda di snake <br /></td></tr>
+<tr class="memdesc:a7938a7902314c161bce2fd5d96bb5209"><td class="mdescLeft">&#160;</td><td class="mdescRight">Muove la coda di snake. <br /></td></tr>
 <tr class="separator:a7938a7902314c161bce2fd5d96bb5209"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -132,8 +132,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="move
       </table>
 </div><div class="memdoc">
 
-<p>muove la testa di snake </p>
-<p>se non ha ancora una coda, lascierà dietro di sè il simbolo '.' inoltre prima di eseguire una mossa verifica se è possibile eseguirla </p>
+<p>Muove la testa di snake. </p>
+<p>Se non ha ancora una coda, lascierà dietro di sè il simbolo '.' inoltre prima di eseguire una mossa verifica se è possibile eseguirla </p>
 
 </div>
 </div>
@@ -175,8 +175,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="move
       </table>
 </div><div class="memdoc">
 
-<p>gestisce i vari casi che si possono verificare prima di muovere effettivamente snake </p>
-<p>se trovo:<br  />
+<p>Gestisce i vari casi che si possono verificare prima di muovere effettivamente snake. </p>
+<p>Se trovo:<br  />
 $: aggiungo un elemento alla coda e aggiungo 10 punti al giocatore<br  />
 _: il giocatore ha vinto<br  />
 !: i punti vengono dimezzati, lo stesso per la coda<br  />

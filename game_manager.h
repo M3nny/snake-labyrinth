@@ -17,7 +17,7 @@ typedef struct {
     char *moves_storage; ///< contiene tutte le mosse eseguite
     int moves_counter; ///< contiene il numero di mosse eseguite
     int score; ///< tiene conto del punteggio
-    char left, up, down, right;
+    char left, up, down, right; ///< contiene il simbolo usato per andare nella rispettiva direzione
     int drill; ///< tiene conto di quanti muri si possono attraversare 
 } labyrinth_player;
 

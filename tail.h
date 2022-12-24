@@ -5,9 +5,9 @@
 
 /// Linked list che contiene le coordinate di ogni elemento della coda di snake
 typedef struct tail {
-    int rows;
-    int columns;
-    struct tail *next;
+    int rows; ///< riga dell'elemento della coda
+    int columns; ///< colonna dell'elemento della coda
+    struct tail *next; ///< puntatore al prossimo elemento della coda
 } vector;
 
 /// Crea un nuovo elemento nella coda
