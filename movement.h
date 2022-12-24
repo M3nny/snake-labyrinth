@@ -62,7 +62,6 @@ void move (char direction, vector **tail, labyrinth_stage *stage, labyrinth_play
             player->position[1] = player->position[1]+1;
         }
     }
-    show_stages(true, *tail, stage);
 }
 
 void move_tail(vector **tail, int rows, int columns) {

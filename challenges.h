@@ -297,9 +297,5 @@ void challenge() {
     printf("\n");
 
     // libero la memoria allocata
-    for ( size_t i = 0; i < stage_AI.rows; i++ ) {
-        free(stage_AI.playground[i]);
-    }
-    free(stage_AI.playground);
-    free(bot.moves_storage);
+    free_game(&stage_AI, &bot, tail);
 }

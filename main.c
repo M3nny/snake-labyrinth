@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <time.h>
 #include "tail.h"
-#include "labyrinth_loader.h"
+#include "game_manager.h"
 #include "movement.h"
 #include "challenges.h"
 
@@ -21,32 +21,43 @@ int main(int argc, char **argv) {
     vector *tail = NULL;
 
     char selected_stage[2] = "x\n";
-    int mode;
-    char direction, show_moves;
-    int moves_counter = 0;
-    srand(time(NULL));
+    int mode, method; // mode: selezione modalità, method: selezione metodo di input del livello
+    char direction, show_moves; // direction: direzione impartita dal giocatore, show_moves: per decidere se mostrare le mosse eseguite a fine partita 
+    srand(time(NULL)); // do un seme casuale al random
 
     printf("Benvenuto su snake labyrinth\n");
-    do {
+
+    do { // scelgo la mdalità
         printf("Seleziona la modalità:\n1 - Singleplayer\n2 - Computer Random\n");
         printf("(input modalità): ");
         scanf("%d", &mode);
     } while (mode != 1 && mode != 2);
-    show_stages(false, tail, &stage);
 
-    do {
-        printf("\nSeleziona una mappa (1 - 2 - 3)\n");
-        printf("(input mappa): ");
-        scanf(" %c", &selected_stage[0]);
-    } while (selected_stage[0] != '1' && selected_stage[0] != '2' && selected_stage[0] != '3');
+    do { // scelgo il metodo di input della mappa
+        printf("Come vuoi selezionare il livello:\n1 - Manuale\n2 - livelli già esistenti\n");
+        printf("(input metodo): ");
+        scanf("%d", &method);
+    } while (method != 1 && method != 2);
 
-    load_game(selected_stage, &stage, &player);
+    if (method == 1) {
+        selected_stage[0] = '0';
+        load_game(selected_stage, method, &stage, &player);
+    } else {
+        show_stages(false, tail, &stage);
+        do {
+            printf("\nSeleziona una mappa (1 - 2 - 3)\n");
+            printf("(input mappa): ");
+            scanf(" %c", &selected_stage[0]);
+        } while (selected_stage[0] != '1' && selected_stage[0] != '2' && selected_stage[0] != '3');
+        load_game(selected_stage, method, &stage, &player);
+    }
+
     clear();
     printf("Mappa selezionata:\n");
     show_stages(true, tail, &stage);
 
     do {
-        do {
+        do { // inserisco la mossa e la memorizzo
             if (mode == 1) {
                 scanf(" %c", &direction);
             } else if (mode == 2) {
@@ -88,11 +99,8 @@ int main(int argc, char **argv) {
         printf("\n");
     }
 
-    for ( size_t i = 0; i < stage.rows; i++ ) {
-        free(stage.playground[i]);
-    }
-    free(stage.playground);
-    free(player.moves_storage);
+    // libero la memoria allocata
+    free_game(&stage, &player, tail);
 
     return 0;
 }

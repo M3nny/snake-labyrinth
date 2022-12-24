@@ -59,3 +59,11 @@ int get_node_index(vector *l, int rows, int columns) {
     }
     return count;
 }
+
+void delete_tail(vector *node) {
+    while (node != NULL) {
+        vector *temp = node; 
+        node = node->next;
+        free(temp);
+    }
+}
