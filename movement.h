@@ -1,5 +1,14 @@
+/**
+ * \file movement.h
+ * \brief Movimento di snake
+*/
+
 int validate_move (char next_position, int *next_coordinates, vector **tail, labyrinth_player *player);
 
+/// Muove la testa di snake
+/**
+ * Se non ha ancora una coda, lascierà dietro di sè il simbolo '.' inoltre prima di eseguire una mossa verifica se è possibile eseguirla
+*/
 void move (char direction, vector **tail, labyrinth_stage *stage, labyrinth_player *player) {
     char next_position;
     int next_coordinates[2];
@@ -64,6 +73,7 @@ void move (char direction, vector **tail, labyrinth_stage *stage, labyrinth_play
     }
 }
 
+/// Muove la coda di snake
 void move_tail(vector **tail, int rows, int columns) {
     if (*tail == NULL) { // se la coda non esiste
         return;
@@ -78,6 +88,16 @@ void move_tail(vector **tail, int rows, int columns) {
     move_tail(&(*tail)->next, rows, columns);
 }
 
+/// Gestisce i vari casi che si possono verificare prima di muovere effettivamente snake
+/**
+ * Se trovo:\n
+ * $: aggiungo un elemento alla coda e aggiungo 10 punti al giocatore\n
+ * _: il giocatore ha vinto\n
+ * !: i punti vengono dimezzati, lo stesso per la coda\n
+ * x: trovo quale è l'indice di quell'elemento della coda ed eseguo n volte la funzione pop in base al valore dell'indice\n
+ * T: il giocatore può attraversare altre 3 pareti (non può andare fuori dal labirinto)\n
+ * #: avendo il trapano posso superare la parete, inoltre diminuisco gli usi possibili del trapano di 1
+*/
 int validate_move (char next_position, int *next_coordinates, vector **tail, labyrinth_player *player) {
     int scored = 0;
     if (next_position != '#' || (next_position == '#' && player->drill > 0)) { // se la prossima cella non è un muro valuto tutte le possibili opzioni

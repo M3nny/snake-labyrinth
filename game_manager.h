@@ -1,20 +1,27 @@
+/**
+ * \file game_manager.h
+ * \brief Logica del gioco
+*/
+
+/// Contiene la matrice su cui si svolge il gioco e la sua grandezza
 typedef struct {
-    char **playground; // contiene il livello
-    int rows; // righe del labirinto
-    int columns; // colonne del labirinto
+    char **playground; ///< contiene il livello
+    int rows; ///< righe del labirinto
+    int columns; ///< colonne del labirinto
 } labyrinth_stage;
 
-
+/// Contiene tutti i valori attuali del giocatore
 typedef struct {
-    int position[2]; // position[0] è la riga attuale, position[1] è la colonna attuale
-    bool won; // flag per vedere se il giocatore ha vinto
-    char *moves_storage;
-    int moves_counter;
-    int score; // tiene conto del punteggio
+    int position[2]; ///< position[0] è la riga attuale, position[1] è la colonna attuale
+    bool won; ///< flag per vedere se il giocatore ha vinto
+    char *moves_storage; ///< contiene tutte le mosse eseguite
+    int moves_counter; ///< contiene il numero di mosse eseguite
+    int score; ///< tiene conto del punteggio
     char left, up, down, right;
-    int drill;
+    int drill; ///< tiene conto di quanti muri si possono attraversare 
 } labyrinth_player;
 
+/// Per ogni elemento della coda, mette il simbolo x nella matrice di gioco
 void show_tail(vector *tail, labyrinth_stage *stage) {
     if (tail == NULL) {
         return;
@@ -23,6 +30,7 @@ void show_tail(vector *tail, labyrinth_stage *stage) {
     show_tail(tail->next, stage);
 }
 
+/// Cancella la coda (all'occhio dell'utente) dalla matrice
 void delete_old_tail(labyrinth_stage *stage) {
     for (int i = 0; i < stage->rows; i++) {
         for (int j = 0; j < stage->columns; j++) {
@@ -33,8 +41,11 @@ void delete_old_tail(labyrinth_stage *stage) {
     }
 }
 
-// se il livello deve ancora essere selezionato stampo tutto il file
-// altrimenti stampo il livello caricato in memoria
+/// Stampa la matrice di gioco
+/** 
+ * se il livello deve ancora essere selezionato stampo tutto il file
+ * contenente i livelli, altrimenti stampo il livello caricato in memoria
+*/
 void show_stages(bool loaded, vector *tail, labyrinth_stage *stage) {
     if (!loaded) {
         FILE* file = fopen("labyrinth.txt", "r");
@@ -62,7 +73,12 @@ void show_stages(bool loaded, vector *tail, labyrinth_stage *stage) {
     }
 }
 
-
+/// Carica in memoria la matrice di gioco e inizializza i valori della struct labyrinth_player
+/**
+ * la matrice può essere caricata in due modi: 
+ * inserendola manualmente oppure
+ * caricandola dal file contenente alcuni livelli già fatti
+*/
 void load_game(const char *stage_no, int method, labyrinth_stage *stage, labyrinth_player *player) {
 
     player->won = false;
@@ -174,20 +190,27 @@ void load_game(const char *stage_no, int method, labyrinth_stage *stage, labyrin
     }
 }
 
+/// Inserisce dentro a moves_storage la mossa passata come parametro
 void store_move(char direction, labyrinth_player *player) {
     player->moves_storage[player->moves_counter] = direction;
     player->moves_counter++;
     player->moves_storage = realloc(player->moves_storage, (player->moves_counter + 1) * sizeof(char));
 }
 
+/// Dealloca dalla memoria la matrice di gioco e gli altri dati precedentementi allocati prima di finire l'esecuzione del programma
 void free_game(labyrinth_stage *stage, labyrinth_player *player, vector *tail) {
     for (size_t i = 0; i < stage->rows; i++ ) {
         free(stage->playground[i]);
     }
     free(stage->playground);
     free(player->moves_storage);
+    delete_tail(tail);
 }
 
+/// Pulisco l'interfaccia del terminale
+/**
+ * se l'OS è unix like, verrà usato il comando clear, altrimenti viene usato cls per windows
+*/
 void clear () {
     #ifdef _WIN32
         system("cls");

@@ -1,3 +1,7 @@
+/**
+ * \file main.c
+ * \brief File principale
+*/
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -9,6 +13,14 @@
 #include "movement.h"
 #include "challenges.h"
 
+/**
+ * 1. Se non è presente --challegne come parametro, faccio scegliere la modalità interattiva/random all'utente
+ * 2. Viene chiesto come si vuole selezionare il livello: input da tastiera specificando righe e colonne del livello, oppure un livello già esistente sul file labyrinth.txt
+ * 3. Viene caricata la matrice in memoria e si comincia a giocare
+ * 4. Dopo ogni mossa l'interfaccia del terminale viene pulita
+ * 5. Alla fine viene chiesto se si vogliono vedere le mosse eseguite (potrebbero essere tante)
+ * 6. Viene deallocato dalla memoria quello che è stato allocato precedentemente (matrice, coda, storage delle mosse eseguite)
+*/
 int main(int argc, char **argv) {
     if (argv[1]) {
         if (strcmp(argv[1], "--challenge") == 0) {
@@ -28,7 +40,7 @@ int main(int argc, char **argv) {
     printf("Benvenuto su snake labyrinth\n");
 
     do { // scelgo la mdalità
-        printf("Seleziona la modalità:\n1 - Singleplayer\n2 - Computer Random\n");
+        printf("Seleziona la modalità:\n1 - Interattiva\n2 - Computer Random\n");
         printf("(input modalità): ");
         scanf("%d", &mode);
     } while (mode != 1 && mode != 2);

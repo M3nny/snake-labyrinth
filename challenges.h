@@ -1,3 +1,9 @@
+/**
+ * \file challenges.h
+ * \brief Contiene l'algoritmo usato per la soluzione delle challenge
+*/
+
+/// Trovato un muro provo ad aggirarlo sia da un lato e sia dall'altro, poi valuto quale è l'opzione più conveniente
 int find_best_track(char direction, vector **tail, labyrinth_stage *stage_AI, labyrinth_player *bot) {
     int checkpoint[] = {bot->position[0], bot->position[1], bot->score}; // prima di provare ad aggirare il muro in entrambre le direzioni, mi salvo lo stato attuale di snake al momento in cui trova il muro
     int track_score;
@@ -133,7 +139,8 @@ int find_best_track(char direction, vector **tail, labyrinth_stage *stage_AI, la
 
     return 1;
 }
-// aggiro il muro in base alla direzione da cui proviene il bot
+
+/// Aggiro il muro in base alla direzione da cui proviene il bot
 void avoid_wall(char direction, vector **tail, labyrinth_stage *stage_AI, labyrinth_player *bot) {
     int choice = 0;
     if (direction == bot->left) { // se incontro il muro da sinistra
@@ -194,6 +201,15 @@ void avoid_wall(char direction, vector **tail, labyrinth_stage *stage_AI, labyri
     }
 }
 
+/// Esegue l'algoritmo usato nella risoluzione della challenges
+/**
+ * 1. Inizializzo il necessario
+ * 2. Prendo in input la matrice di gioco
+ * 3. Eseguo la mossa che mi consente di uscire dal punto di partenza
+ * 4. Mi allineo orizzontalmente/verticalmente in base a dove è il bot e l'uscita (evitando i muri)
+ * 5. Quando mi sono allineato vado dritto verso l'uscita (evitando i muri)
+ * 6. Libero la memoria allocata
+*/
 void challenge() {
     // inizializzo/dichiaro tutto il necessario
     labyrinth_stage stage_AI;
