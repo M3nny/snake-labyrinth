@@ -261,33 +261,79 @@ void challenge() {
     }
 
     do {
-        // cerco di allinearmi all'uscita
-        if(bot.position[1] < gate[1]) { // mi muovo orizzontalmente verso detra
-            if (stage_AI.playground[bot.position[0]][bot.position[1] + 1] == '#' && bot.drill <= 0) { // se trovo un muro e non ho il trapano, lo aggiro
-                avoid_wall(bot.right, &tail, &stage_AI, &bot);
+        // cerco di allinearmi all'uscita, se non ci riesco  e non ho un trapano, aggiro il muro
+        while (!aligned) {
+            if (bot.position[0] == gate[0] || bot.position[1] == gate[1]) {
+                aligned = true;
+                break;
             }
-            move(bot.right, &tail, &stage_AI, &bot);
-            store_move(bot.right, &bot);
-        } else if (bot.position[1] > gate[1]) { // mi muovo orizzontalmente verso sinistra
-            if (stage_AI.playground[bot.position[0]][bot.position[1] - 1] == '#' && bot.drill <= 0) {
-                avoid_wall(bot.left, &tail, &stage_AI, &bot);
+            if (gate[0] == 0 || gate[0] == stage_AI.rows - 1) {
+                // allineo orizzontalmente
+                if(bot.position[1] < gate[1]) {
+                    if (stage_AI.playground[bot.position[0]][bot.position[1] + 1] == '#' && bot.drill <= 0) {
+                        avoid_wall(bot.right, &tail, &stage_AI, &bot);
+                    }
+                    move(bot.right, &tail, &stage_AI, &bot);
+                    store_move(bot.right, &bot);
+                } else if (bot.position[1] > gate[1]) {
+                    if (stage_AI.playground[bot.position[0]][bot.position[1] - 1] == '#' && bot.drill <= 0) {
+                        avoid_wall(bot.left, &tail, &stage_AI, &bot);
+                    }
+                    move(bot.left, &tail, &stage_AI, &bot);
+                    store_move(bot.left, &bot);
+                }
+            } else {
+                // allineo verticalmente
+                if (bot.position[0] < gate[0]) {
+                    if (stage_AI.playground[bot.position[0] + 1][bot.position[1]] == '#' && bot.drill <= 0) {
+                        avoid_wall(bot.down, &tail, &stage_AI, &bot);
+                    }
+                    move(bot.down, &tail, &stage_AI, &bot);
+                    store_move(bot.down, &bot);
+                } else if (bot.position[0] > gate[0]) {
+                    if (stage_AI.playground[bot.position[0] - 1][bot.position[1]] == '#' && bot.drill <= 0) {
+                        avoid_wall(bot.up, &tail, &stage_AI, &bot);
+                    }
+                    move(bot.up, &tail, &stage_AI, &bot);
+                    store_move(bot.up, &bot);
+                }
             }
-            move(bot.left, &tail, &stage_AI, &bot);
-            store_move(bot.left, &bot);
-        }
+        };
 
-        if (bot.position[0] < gate[0]) { // mi muovo verticalmente verso giù
-            if (stage_AI.playground[bot.position[0] + 1][bot.position[1]] == '#' && bot.drill <= 0) {
-                avoid_wall(bot.down, &tail, &stage_AI, &bot);
+        // se sono allineato verticalmente o orizzontalmente, vado verso l'uscita
+        // se trovo un muro  e non ho il trapano, lo aggiro
+        if (bot.position[0] == gate[0]) {
+            if (bot.position[1] < gate[1]) {
+                if (stage_AI.playground[bot.position[0]][bot.position[1] + 1] == '#' && bot.drill <= 0) {
+                    avoid_wall(bot.right, &tail, &stage_AI, &bot);
+                    aligned = false;
+                }
+                move(bot.right, &tail, &stage_AI, &bot);
+                store_move(bot.right, &bot);
+            } else {
+                if (stage_AI.playground[bot.position[0]][bot.position[1] - 1] == '#' && bot.drill <= 0) {
+                    avoid_wall(bot.left, &tail, &stage_AI, &bot);
+                    aligned = false;
+                }
+                move(bot.left, &tail, &stage_AI, &bot);
+                store_move(bot.left, &bot);
             }
-            move(bot.down, &tail, &stage_AI, &bot);
-            store_move(bot.down, &bot);
-        } else if (bot.position[0] > gate[0]) { // mi muovo verticalmente verso su
-            if (stage_AI.playground[bot.position[0] - 1][bot.position[1]] == '#' && bot.drill <= 0) {
-                avoid_wall(bot.up, &tail, &stage_AI, &bot);
+        } else {
+            if (bot.position[0] < gate[0]) {
+                if (stage_AI.playground[bot.position[0] + 1][bot.position[1]] == '#' && bot.drill <= 0) {
+                    avoid_wall(bot.down, &tail, &stage_AI, &bot);
+                    aligned = false;
+                }
+                move(bot.down, &tail, &stage_AI, &bot);
+                store_move(bot.down, &bot);
+            } else {
+                if (stage_AI.playground[bot.position[0] - 1][bot.position[1]] == '#' && bot.drill <= 0) {
+                    avoid_wall(bot.up, &tail, &stage_AI, &bot);
+                    aligned = false;
+                }
+                move(bot.up, &tail, &stage_AI, &bot);
+                store_move(bot.up, &bot);
             }
-            move(bot.up, &tail, &stage_AI, &bot);
-            store_move(bot.up, &bot);
         }
     } while (!bot.won);
 
