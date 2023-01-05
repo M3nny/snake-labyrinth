@@ -1,0 +1,49 @@
+\hypertarget{tail_8h}{}\doxysection{tail.\+h File Reference}
+\label{tail_8h}\index{tail.h@{tail.h}}
+
+
+Gestione della coda di snake.  
+
+
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structtail}{tail}}
+\begin{DoxyCompactList}\small\item\em Linked list che contiene le coordinate di ogni elemento della coda di snake. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{tail_8h_aac0872e4588fecaa90c72d2f3b1382b3}\label{tail_8h_aac0872e4588fecaa90c72d2f3b1382b3}} 
+typedef struct \mbox{\hyperlink{structtail}{tail}} \mbox{\hyperlink{tail_8h_aac0872e4588fecaa90c72d2f3b1382b3}{vector}}
+\begin{DoxyCompactList}\small\item\em Linked list che contiene le coordinate di ogni elemento della coda di snake. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{tail_8h_aae8b3dde9ad699060620059389c550a1}\label{tail_8h_aae8b3dde9ad699060620059389c550a1}} 
+\mbox{\hyperlink{tail_8h_aac0872e4588fecaa90c72d2f3b1382b3}{vector}} $\ast$ \mbox{\hyperlink{tail_8h_aae8b3dde9ad699060620059389c550a1}{l\+\_\+create}} (int rows, int columns)
+\begin{DoxyCompactList}\small\item\em Crea un nuovo elemento nella coda. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{tail_8h_a19721a3f3e88b35255a2ef9fcfb7f486}\label{tail_8h_a19721a3f3e88b35255a2ef9fcfb7f486}} 
+void \mbox{\hyperlink{tail_8h_a19721a3f3e88b35255a2ef9fcfb7f486}{vector\+\_\+append}} (\mbox{\hyperlink{tail_8h_aac0872e4588fecaa90c72d2f3b1382b3}{vector}} $\ast$$\ast$l\+\_\+orig, int rows, int columns)
+\begin{DoxyCompactList}\small\item\em Aggiunge un nuovo elemento alla coda. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{tail_8h_a34eee19b9bf3e0d8523778cb2c034489}\label{tail_8h_a34eee19b9bf3e0d8523778cb2c034489}} 
+void \mbox{\hyperlink{tail_8h_a34eee19b9bf3e0d8523778cb2c034489}{pop}} (\mbox{\hyperlink{tail_8h_aac0872e4588fecaa90c72d2f3b1382b3}{vector}} $\ast$$\ast$l\+\_\+orig)
+\begin{DoxyCompactList}\small\item\em Rimuove l\textquotesingle{}ultimo elemento dalla coda. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{tail_8h_ab61840df2aec527aa8d9ed73723108dd}\label{tail_8h_ab61840df2aec527aa8d9ed73723108dd}} 
+void \mbox{\hyperlink{tail_8h_ab61840df2aec527aa8d9ed73723108dd}{print\+\_\+vector}} (\mbox{\hyperlink{tail_8h_aac0872e4588fecaa90c72d2f3b1382b3}{vector}} $\ast$l)
+\begin{DoxyCompactList}\small\item\em Stampa i contenuti della linked list. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{tail_8h_abb2a1c0bf20538342ecce627ae390d83}\label{tail_8h_abb2a1c0bf20538342ecce627ae390d83}} 
+int \mbox{\hyperlink{tail_8h_abb2a1c0bf20538342ecce627ae390d83}{get\+\_\+tail\+\_\+length}} (\mbox{\hyperlink{tail_8h_aac0872e4588fecaa90c72d2f3b1382b3}{vector}} $\ast$l)
+\begin{DoxyCompactList}\small\item\em Ottiene quanti elementi sono presenti nella linked list. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{tail_8h_ad62d85c612fff518794c97e9ecc02877}\label{tail_8h_ad62d85c612fff518794c97e9ecc02877}} 
+int \mbox{\hyperlink{tail_8h_ad62d85c612fff518794c97e9ecc02877}{get\+\_\+node\+\_\+index}} (\mbox{\hyperlink{tail_8h_aac0872e4588fecaa90c72d2f3b1382b3}{vector}} $\ast$l, int rows, int columns)
+\begin{DoxyCompactList}\small\item\em Ritorna la posizione dell\textquotesingle{}elemento della lista che possiede i valori passati come parametri alla funzione. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{tail_8h_a98a9c71b15852bb4ca56617597e00518}\label{tail_8h_a98a9c71b15852bb4ca56617597e00518}} 
+void \mbox{\hyperlink{tail_8h_a98a9c71b15852bb4ca56617597e00518}{delete\+\_\+tail}} (\mbox{\hyperlink{tail_8h_aac0872e4588fecaa90c72d2f3b1382b3}{vector}} $\ast$l)
+\begin{DoxyCompactList}\small\item\em Libera la memoria allocata dalla linked list, viene chiamata da free\+\_\+game prima di finire il programma. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gestione della coda di snake. 
+

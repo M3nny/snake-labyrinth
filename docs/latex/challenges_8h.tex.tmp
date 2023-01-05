@@ -1,0 +1,47 @@
+\hypertarget{challenges_8h}{}\doxysection{challenges.\+h File Reference}
+\label{challenges_8h}\index{challenges.h@{challenges.h}}
+
+
+Contiene l\textquotesingle{}algoritmo usato per la soluzione delle challenge.  
+
+
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{challenges_8h_aaddf8fd073cacc979f4c2672c0a7cf68}\label{challenges_8h_aaddf8fd073cacc979f4c2672c0a7cf68}} 
+int \mbox{\hyperlink{challenges_8h_aaddf8fd073cacc979f4c2672c0a7cf68}{find\+\_\+best\+\_\+track}} (char direction, \mbox{\hyperlink{tail_8h_aac0872e4588fecaa90c72d2f3b1382b3}{vector}} $\ast$$\ast$\mbox{\hyperlink{structtail}{tail}}, \mbox{\hyperlink{structlabyrinth__stage}{labyrinth\+\_\+stage}} $\ast$stage\+\_\+\+AI, \mbox{\hyperlink{structlabyrinth__player}{labyrinth\+\_\+player}} $\ast$bot)
+\begin{DoxyCompactList}\small\item\em Trovato un muro provo ad aggirarlo sia da un lato e sia dall\textquotesingle{}altro, poi valuto quale è l\textquotesingle{}opzione più conveniente. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{challenges_8h_ab5fe2d9ea674387cbd0d7b73a6bcb5f6}\label{challenges_8h_ab5fe2d9ea674387cbd0d7b73a6bcb5f6}} 
+void \mbox{\hyperlink{challenges_8h_ab5fe2d9ea674387cbd0d7b73a6bcb5f6}{avoid\+\_\+wall}} (char direction, \mbox{\hyperlink{tail_8h_aac0872e4588fecaa90c72d2f3b1382b3}{vector}} $\ast$$\ast$\mbox{\hyperlink{structtail}{tail}}, \mbox{\hyperlink{structlabyrinth__stage}{labyrinth\+\_\+stage}} $\ast$stage\+\_\+\+AI, \mbox{\hyperlink{structlabyrinth__player}{labyrinth\+\_\+player}} $\ast$bot)
+\begin{DoxyCompactList}\small\item\em Aggiro il muro in base alla direzione da cui proviene il bot. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{challenges_8h_a0096245d65985209605a96493b6f5a46}{challenge}} ()
+\begin{DoxyCompactList}\small\item\em Esegue l\textquotesingle{}algoritmo usato nella risoluzione della challenges. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contiene l\textquotesingle{}algoritmo usato per la soluzione delle challenge. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{challenges_8h_a0096245d65985209605a96493b6f5a46}\label{challenges_8h_a0096245d65985209605a96493b6f5a46}} 
+\index{challenges.h@{challenges.h}!challenge@{challenge}}
+\index{challenge@{challenge}!challenges.h@{challenges.h}}
+\doxysubsubsection{\texorpdfstring{challenge()}{challenge()}}
+{\footnotesize\ttfamily void challenge (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Esegue l\textquotesingle{}algoritmo usato nella risoluzione della challenges. 
+
+
+\begin{DoxyEnumerate}
+\item Inizializzo il necessario
+\item Prendo in input la matrice di gioco
+\item Eseguo la mossa che mi consente di uscire dal punto di partenza
+\item Mi allineo orizzontalmente/verticalmente in base a dove è il bot e l\textquotesingle{}uscita (evitando i muri)
+\item Quando mi sono allineato vado dritto verso l\textquotesingle{}uscita (evitando i muri)
+\item Libero la memoria allocata 
+\end{DoxyEnumerate}

@@ -79,7 +79,7 @@ void show_stages(bool loaded, vector *tail, labyrinth_stage *stage) {
  * inserendola manualmente oppure
  * caricandola dal file contenente alcuni livelli già fatti
 */
-void load_game(const char *stage_no, int method, labyrinth_stage *stage, labyrinth_player *player) {
+void load_game(char *stage_no, int method, labyrinth_stage *stage, labyrinth_player *player) {
 
     player->won = false;
     player->score = 1000;
