@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['pop_63',['pop',['../tail_8h.html#a34eee19b9bf3e0d8523778cb2c034489',1,'tail.h']]],
-  ['print_5fvector_64',['print_vector',['../tail_8h.html#ab61840df2aec527aa8d9ed73723108dd',1,'tail.h']]]
+  ['pop_64',['pop',['../tail_8h.html#a27dcc4a870c8db491e4bf6ce74c3f7ac',1,'tail.h']]],
+  ['print_5flist_65',['print_list',['../tail_8h.html#aeedcb34e3068ba4f19d067f74f808eef',1,'tail.h']]]
 ];

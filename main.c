@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
     }
     labyrinth_stage stage;
     labyrinth_player player;
-    vector *tail = NULL;
+    list *tail = NULL;
 
     char selected_stage[2] = "x\n";
     int mode, method; // mode: selezione modalità, method: selezione metodo di input del livello

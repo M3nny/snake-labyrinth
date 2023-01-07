@@ -3,13 +3,13 @@
  * \brief Movimento di snake
 */
 
-int validate_move (char next_position, int *next_coordinates, vector **tail, labyrinth_player *player);
+int validate_move (char next_position, int *next_coordinates, list **tail, labyrinth_player *player);
 
 /// Muove la testa di snake
 /**
  * Se non ha ancora una coda, lascierà dietro di sè il simbolo '.' inoltre prima di eseguire una mossa verifica se è possibile eseguirla
 */
-void move (char direction, vector **tail, labyrinth_stage *stage, labyrinth_player *player) {
+void move (char direction, list **tail, labyrinth_stage *stage, labyrinth_player *player) {
     char next_position;
     int next_coordinates[2];
 
@@ -74,7 +74,7 @@ void move (char direction, vector **tail, labyrinth_stage *stage, labyrinth_play
 }
 
 /// Muove la coda di snake
-void move_tail(vector **tail, int rows, int columns) {
+void move_tail(list **tail, int rows, int columns) {
     if (*tail == NULL) { // se la coda non esiste
         return;
     }
@@ -98,11 +98,11 @@ void move_tail(vector **tail, int rows, int columns) {
  * T: il giocatore può attraversare altre 3 pareti (non può andare fuori dal labirinto)\n
  * #: avendo il trapano posso superare la parete, inoltre diminuisco gli usi possibili del trapano di 1
 */
-int validate_move (char next_position, int *next_coordinates, vector **tail, labyrinth_player *player) {
+int validate_move (char next_position, int *next_coordinates, list **tail, labyrinth_player *player) {
     int scored = 0;
     if (next_position != '#' || (next_position == '#' && player->drill > 0)) { // se la prossima cella non è un muro valuto tutte le possibili opzioni
         if (next_position == '$') { // punti bonus
-            vector_append(tail, player->position[0], player->position[1]);
+            list_append(tail, player->position[0], player->position[1]);
             player->score += 10;
             scored = 1;
         } else {

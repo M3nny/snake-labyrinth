@@ -22,7 +22,7 @@ typedef struct {
 } labyrinth_player;
 
 /// Per ogni elemento della coda, mette il simbolo x nella matrice di gioco
-void show_tail(vector *tail, labyrinth_stage *stage) {
+void show_tail(list *tail, labyrinth_stage *stage) {
     if (tail == NULL) {
         return;
     }
@@ -46,7 +46,7 @@ void delete_old_tail(labyrinth_stage *stage) {
  * se il livello deve ancora essere selezionato stampo tutto il file
  * contenente i livelli, altrimenti stampo il livello caricato in memoria
 */
-void show_stages(bool loaded, vector *tail, labyrinth_stage *stage) {
+void show_stages(bool loaded, list *tail, labyrinth_stage *stage) {
     if (!loaded) {
         FILE* file = fopen("labyrinth.txt", "r");
 
@@ -198,7 +198,7 @@ void store_move(char direction, labyrinth_player *player) {
 }
 
 /// Dealloca dalla memoria la matrice di gioco e gli altri dati precedentementi allocati prima di finire l'esecuzione del programma
-void free_game(labyrinth_stage *stage, labyrinth_player *player, vector *tail) {
+void free_game(labyrinth_stage *stage, labyrinth_player *player, list *tail) {
     for (size_t i = 0; i < stage->rows; i++ ) {
         free(stage->playground[i]);
     }

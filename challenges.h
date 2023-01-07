@@ -4,7 +4,7 @@
 */
 
 /// Trovato un muro provo ad aggirarlo sia da un lato e sia dall'altro, poi valuto quale è l'opzione più conveniente
-int find_best_track(char direction, vector **tail, labyrinth_stage *stage_AI, labyrinth_player *bot) {
+int find_best_track(char direction, list **tail, labyrinth_stage *stage_AI, labyrinth_player *bot) {
     int checkpoint[] = {bot->position[0], bot->position[1], bot->score}; // prima di provare ad aggirare il muro in entrambre le direzioni, mi salvo lo stato attuale di snake al momento in cui trova il muro
     int track_score;
 
@@ -141,7 +141,7 @@ int find_best_track(char direction, vector **tail, labyrinth_stage *stage_AI, la
 }
 
 /// Aggiro il muro in base alla direzione da cui proviene il bot
-void avoid_wall(char direction, vector **tail, labyrinth_stage *stage_AI, labyrinth_player *bot) {
+void avoid_wall(char direction, list **tail, labyrinth_stage *stage_AI, labyrinth_player *bot) {
     int choice = 0;
     if (direction == bot->left) { // se incontro il muro da sinistra
         while (stage_AI->playground[bot->position[0]][bot->position[1] - 1] == '#') { // finchè a sinistra ho il muro
@@ -214,7 +214,7 @@ void challenge() {
     // inizializzo/dichiaro tutto il necessario
     labyrinth_stage stage_AI;
     labyrinth_player bot;
-    vector *tail = NULL;
+    list *tail = NULL;
 
     // inizializzo i campi all'interno della struct
     bot.won = false;

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vector_81',['vector',['../tail_8h.html#aac0872e4588fecaa90c72d2f3b1382b3',1,'tail.h']]]
+  ['list_81',['list',['../tail_8h.html#ac1333894ccaeb6da94d2674c0a70d6a4',1,'tail.h']]]
 ];
