@@ -51,7 +51,7 @@ void show_stages(bool loaded, list *tail, labyrinth_stage *stage) {
         FILE* file = fopen("labyrinths/labyrinths.txt", "r");
 
         if(!file) {
-            printf("\n Unable to open file");
+            printf("\n Impossibile aprire il file");
             exit(EXIT_FAILURE);
         }
 
@@ -99,7 +99,7 @@ void load_game(char *stage_no, labyrinth_stage *stage, labyrinth_player *player)
         FILE* file = fopen("labyrinths/labyrinths.txt", "r");
 
         if(!file) {
-            printf("\n Unable to open file");
+            printf("\n Impossibile aprire il file");
             exit(EXIT_FAILURE);
         }
         

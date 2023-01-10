@@ -29,12 +29,13 @@ void list_append(list **l_orig, int rows, int columns) {
     }
 }
 
-/// Rimuove l'ultimo elemento dalla coda
+/// Rimuove il primo elemento dalla lista
 void pop(list **l_orig) {
     list *temp = *l_orig;
     if (temp) {
         *l_orig = temp->next;
     }
+    free(temp);
 }
 
 /// Stampa i contenuti della linked list

@@ -31,46 +31,48 @@
 \DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{if}\ (temp)\ \{}
 \DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ *l\_orig\ =\ temp-\/>\mbox{\hyperlink{structtail_a190818b0b87effe62ca4e6600161ff3b}{next}};}
 \DoxyCodeLine{00037\ \ \ \ \ \}}
-\DoxyCodeLine{00038\ \}}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00041\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{tail_8h_aeedcb34e3068ba4f19d067f74f808eef}{print\_list}}(\mbox{\hyperlink{structtail}{list}}\ *l)\ \{}
-\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{if}\ (l\ ==\ NULL)\ \textcolor{comment}{//\ fine\ lista,\ cioè\ lista\ vuota}}
-\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%d\ -\/\ \%d\ /\ "{}},\ l-\/>\mbox{\hyperlink{structtail_a7a8a4b4320b630f3ef3205ab93cebcf1}{rows}},\ l-\/>\mbox{\hyperlink{structtail_a89b8b2ddd85b000014eb779d05b5376e}{columns}});}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{tail_8h_aeedcb34e3068ba4f19d067f74f808eef}{print\_list}}(l-\/>\mbox{\hyperlink{structtail_a190818b0b87effe62ca4e6600161ff3b}{next}});}
-\DoxyCodeLine{00047\ \ \ \ \ \}}
-\DoxyCodeLine{00048\ \}}
-\DoxyCodeLine{00049\ }
-\DoxyCodeLine{00051\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{tail_8h_aea7216e8cd8bca8c3974f44acd87ae7d}{get\_tail\_length}}(\mbox{\hyperlink{structtail}{list}}\ *l)\ \{}
-\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ 0;}
-\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{structtail}{list}}\ *current\ =\ l;}
-\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{while}\ (current\ !=\ NULL)\ \{}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ current\ =\ current-\/>\mbox{\hyperlink{structtail_a190818b0b87effe62ca4e6600161ff3b}{next}};}
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ count++;}
-\DoxyCodeLine{00057\ \ \ \ \ \}}
-\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{return}\ count;}
-\DoxyCodeLine{00059\ \}}
-\DoxyCodeLine{00060\ }
-\DoxyCodeLine{00062\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{tail_8h_acc71fd5c58dd971fb24e275230be8682}{get\_node\_index}}(\mbox{\hyperlink{structtail}{list}}\ *l,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structtail_a7a8a4b4320b630f3ef3205ab93cebcf1}{rows}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structtail_a89b8b2ddd85b000014eb779d05b5376e}{columns}})\ \{}
-\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ 0;}
-\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{structtail}{list}}\ *current\ =\ l;}
-\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordflow}{while}\ (current\ !=\ NULL)\ \{}
-\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current-\/>\mbox{\hyperlink{structtail_a7a8a4b4320b630f3ef3205ab93cebcf1}{rows}}\ ==\ \mbox{\hyperlink{structtail_a7a8a4b4320b630f3ef3205ab93cebcf1}{rows}}\ \&\&\ current-\/>\mbox{\hyperlink{structtail_a89b8b2ddd85b000014eb779d05b5376e}{columns}}\ ==\ \mbox{\hyperlink{structtail_a89b8b2ddd85b000014eb779d05b5376e}{columns}})\ \{}
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ count;}
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ current\ =\ current-\/>\mbox{\hyperlink{structtail_a190818b0b87effe62ca4e6600161ff3b}{next}};}
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ count++;}
-\DoxyCodeLine{00071\ \ \ \ \ \}}
-\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{return}\ count;}
-\DoxyCodeLine{00073\ \}}
-\DoxyCodeLine{00074\ }
-\DoxyCodeLine{00076\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{tail_8h_a43046532dafc269b51807dd7ec5ad208}{delete\_tail}}(\mbox{\hyperlink{structtail}{list}}\ *l)\ \{}
-\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{while}\ (l\ !=\ NULL)\ \{}
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structtail}{list}}\ *temp\ =\ l;\ }
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ l\ =\ l-\/>\mbox{\hyperlink{structtail_a190818b0b87effe62ca4e6600161ff3b}{next}};}
-\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ free(temp);}
-\DoxyCodeLine{00081\ \ \ \ \ \}}
-\DoxyCodeLine{00082\ \}}
+\DoxyCodeLine{00038\ \ \ \ \ free(temp);}
+\DoxyCodeLine{00039\ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{tail_8h_aeedcb34e3068ba4f19d067f74f808eef}{print\_list}}(\mbox{\hyperlink{structtail}{list}}\ *l)\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{if}\ (l\ ==\ NULL)\ \textcolor{comment}{//\ fine\ lista,\ cioè\ lista\ vuota}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%d\ -\/\ \%d\ /\ "{}},\ l-\/>\mbox{\hyperlink{structtail_a7a8a4b4320b630f3ef3205ab93cebcf1}{rows}},\ l-\/>\mbox{\hyperlink{structtail_a89b8b2ddd85b000014eb779d05b5376e}{columns}});}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{tail_8h_aeedcb34e3068ba4f19d067f74f808eef}{print\_list}}(l-\/>\mbox{\hyperlink{structtail_a190818b0b87effe62ca4e6600161ff3b}{next}});}
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00049\ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00052\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{tail_8h_aea7216e8cd8bca8c3974f44acd87ae7d}{get\_tail\_length}}(\mbox{\hyperlink{structtail}{list}}\ *l)\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ 0;}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{structtail}{list}}\ *current\ =\ l;}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordflow}{while}\ (current\ !=\ NULL)\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ current\ =\ current-\/>\mbox{\hyperlink{structtail_a190818b0b87effe62ca4e6600161ff3b}{next}};}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ count++;}
+\DoxyCodeLine{00058\ \ \ \ \ \}}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{return}\ count;}
+\DoxyCodeLine{00060\ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00063\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{tail_8h_acc71fd5c58dd971fb24e275230be8682}{get\_node\_index}}(\mbox{\hyperlink{structtail}{list}}\ *l,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structtail_a7a8a4b4320b630f3ef3205ab93cebcf1}{rows}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structtail_a89b8b2ddd85b000014eb779d05b5376e}{columns}})\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ 0;}
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{structtail}{list}}\ *current\ =\ l;}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{while}\ (current\ !=\ NULL)\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current-\/>\mbox{\hyperlink{structtail_a7a8a4b4320b630f3ef3205ab93cebcf1}{rows}}\ ==\ \mbox{\hyperlink{structtail_a7a8a4b4320b630f3ef3205ab93cebcf1}{rows}}\ \&\&\ current-\/>\mbox{\hyperlink{structtail_a89b8b2ddd85b000014eb779d05b5376e}{columns}}\ ==\ \mbox{\hyperlink{structtail_a89b8b2ddd85b000014eb779d05b5376e}{columns}})\ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ count;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ current\ =\ current-\/>\mbox{\hyperlink{structtail_a190818b0b87effe62ca4e6600161ff3b}{next}};}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ count++;}
+\DoxyCodeLine{00072\ \ \ \ \ \}}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordflow}{return}\ count;}
+\DoxyCodeLine{00074\ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00077\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{tail_8h_a43046532dafc269b51807dd7ec5ad208}{delete\_tail}}(\mbox{\hyperlink{structtail}{list}}\ *l)\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{structtail}{list}}\ *temp;\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordflow}{while}\ (l\ !=\ NULL)\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ temp\ =\ l;}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ l\ =\ l-\/>\mbox{\hyperlink{structtail_a190818b0b87effe62ca4e6600161ff3b}{next}};}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ free(temp);}
+\DoxyCodeLine{00083\ \ \ \ \ \}}
+\DoxyCodeLine{00084\ \}}
 
 \end{DoxyCode}
