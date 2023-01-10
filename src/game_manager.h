@@ -79,7 +79,7 @@ void show_stages(bool loaded, list *tail, labyrinth_stage *stage) {
  * inserendola manualmente oppure
  * caricandola dal file contenente alcuni livelli già fatti
 */
-void load_game(char *stage_no, int method, labyrinth_stage *stage, labyrinth_player *player) {
+void load_game(char *stage_no, labyrinth_stage *stage, labyrinth_player *player) {
 
     player->won = false;
     player->score = 1000;
@@ -94,7 +94,6 @@ void load_game(char *stage_no, int method, labyrinth_stage *stage, labyrinth_pla
     if (stage_no[0] != '0') {
         char line[50];
         int rows = 0, columns = 0; // numero di righe e colonne
-        bool selected = false;
         char c;
 
         FILE* file = fopen("labyrinth.txt", "r");
@@ -106,7 +105,6 @@ void load_game(char *stage_no, int method, labyrinth_stage *stage, labyrinth_pla
         
         while (fgets(line, sizeof(line), file)) { // leggo tutto il file e stoppo il ciclo dopo aver letto il labirinto
             if ((strcmp(line, stage_no)) == 0) { // se trovo il numero corrispondente al labirinto comincio a leggerlo
-                selected = true;
                 while (fgets(line, sizeof(line), file)) { // leggo il labirinto finchè non trovo end
                     if ((strcmp(line, "end\n")) == 0) {
                         break;
@@ -114,8 +112,6 @@ void load_game(char *stage_no, int method, labyrinth_stage *stage, labyrinth_pla
                     columns = strlen(line) - 1;
                     rows++;
                 }
-            }
-            if (selected) {
                 break;
             }
         }
@@ -137,13 +133,10 @@ void load_game(char *stage_no, int method, labyrinth_stage *stage, labyrinth_pla
         // rimando all'inizio il puntatore del file
         // poi con un'operazione analoga alla precedente, metto dentro alla matrice il livello selezionato
         rewind(file);
-        selected = false;
 
         while (fgets(line, sizeof(line), file)) { // leggo tutto il file e stoppo il ciclo dopo aver letto il labirinto
             if ((strcmp(line, stage_no)) == 0) { // se trovo il numero corrispondente al labirinto comincio a leggerlo
-                selected = true;
-
-                // metto dentro alla matrice tutti gli elementi che non sono \n
+                // metto dentro alla matrice tutti gli elementi
                 for (int i = 0; i < stage->rows; i++) {
                     for (int j = 0; j < stage->columns; j++) {
                         do {
@@ -156,9 +149,6 @@ void load_game(char *stage_no, int method, labyrinth_stage *stage, labyrinth_pla
                         } while (c == '\n');
                     }
                 }
-
-            }
-            if (selected) {
                 break;
             }
         }
@@ -179,7 +169,6 @@ void load_game(char *stage_no, int method, labyrinth_stage *stage, labyrinth_pla
         for (int i = 0; i < stage->rows; i++) {
             scanf(" %[^\n]%*c", input);
             for (int j = 0; j < stage->columns; j++) {
-                printf("%c", input[j]);
                 if (input[j] == 'o') {
                     player->position[0] = i;
                     player->position[1] = j;

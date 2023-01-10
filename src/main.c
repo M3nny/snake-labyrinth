@@ -53,7 +53,7 @@ int main(int argc, char **argv) {
 
     if (method == 1) {
         selected_stage[0] = '0';
-        load_game(selected_stage, method, &stage, &player);
+        load_game(selected_stage, &stage, &player);
     } else {
         show_stages(false, tail, &stage);
         do {
@@ -61,7 +61,7 @@ int main(int argc, char **argv) {
             printf("(input mappa): ");
             scanf(" %c", &selected_stage[0]);
         } while (selected_stage[0] != '1' && selected_stage[0] != '2' && selected_stage[0] != '3');
-        load_game(selected_stage, method, &stage, &player);
+        load_game(selected_stage, &stage, &player);
     }
 
     clear();
@@ -100,7 +100,7 @@ int main(int argc, char **argv) {
     printf("Hai vinto!\nDesideri vedere le mosse eseguite?(s/n) ");
 
     do {
-        scanf(" %c", &show_moves);
+        scanf("%c", &show_moves);
     } while (show_moves != 's' && show_moves != 'n');
 
     if (show_moves == 's') {

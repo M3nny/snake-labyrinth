@@ -314,10 +314,10 @@ void challenge() {
                     store_move(bot.up, &bot);
                 }
             }
-        };
+        }
 
         // se sono allineato verticalmente o orizzontalmente, vado verso l'uscita
-        // se trovo un muro  e non ho il trapano, lo aggiro
+        // se trovo un muro e non ho il trapano, lo aggiro
         if (bot.position[0] == gate[0]) {
             if (bot.position[1] < gate[1]) {
                 if (stage_AI.playground[bot.position[0]][bot.position[1] + 1] == '#' && bot.drill <= 0) {
