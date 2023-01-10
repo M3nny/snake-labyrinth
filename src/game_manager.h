@@ -48,7 +48,7 @@ void delete_old_tail(labyrinth_stage *stage) {
 */
 void show_stages(bool loaded, list *tail, labyrinth_stage *stage) {
     if (!loaded) {
-        FILE* file = fopen("labyrinth.txt", "r");
+        FILE* file = fopen("labyrinths/labyrinths.txt", "r");
 
         if(!file) {
             printf("\n Unable to open file");
@@ -96,7 +96,7 @@ void load_game(char *stage_no, labyrinth_stage *stage, labyrinth_player *player)
         int rows = 0, columns = 0; // numero di righe e colonne
         char c;
 
-        FILE* file = fopen("labyrinth.txt", "r");
+        FILE* file = fopen("labyrinths/labyrinths.txt", "r");
 
         if(!file) {
             printf("\n Unable to open file");

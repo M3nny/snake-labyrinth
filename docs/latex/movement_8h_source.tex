@@ -1,0 +1,135 @@
+\hypertarget{movement_8h_source}{}\doxysection{movement.\+h}
+\label{movement_8h_source}\index{/Users/M3nny/Documents/GitHub/snake-\/labyrinth/src/movement.h@{/Users/M3nny/Documents/GitHub/snake-\/labyrinth/src/movement.h}}
+\mbox{\hyperlink{movement_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00006\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{movement_8h_ace2edc9e40d1e165593e1afc57bec481}{validate\_move}}\ (\textcolor{keywordtype}{char}\ next\_position,\ \textcolor{keywordtype}{int}\ *next\_coordinates,\ \mbox{\hyperlink{structtail}{list}}\ **\mbox{\hyperlink{structtail}{tail}},\ \mbox{\hyperlink{structlabyrinth__player}{labyrinth\_player}}\ *player);}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00012\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{movement_8h_ac2ac17f52799f3644932c2066f320942}{move}}\ (\textcolor{keywordtype}{char}\ direction,\ \mbox{\hyperlink{structtail}{list}}\ **\mbox{\hyperlink{structtail}{tail}},\ \mbox{\hyperlink{structlabyrinth__stage}{labyrinth\_stage}}\ *stage,\ \mbox{\hyperlink{structlabyrinth__player}{labyrinth\_player}}\ *player)\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{char}\ next\_position;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{int}\ next\_coordinates[2];}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordflow}{if}\ (direction\ ==\ player-\/>left)\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ prima\ di\ effettuare\ altri\ controlli,\ guardo\ se\ la\ mossa\ mi\ fa\ andare\ fuori\ dal\ labirinto}}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]-\/1\ <\ 0)\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ next\_position\ =\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]][player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]-\/1];}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ next\_coordinates[0]\ =\ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0];}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ next\_coordinates[1]\ =\ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]-\/1;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{movement_8h_ace2edc9e40d1e165593e1afc57bec481}{validate\_move}}(next\_position,\ next\_coordinates,\ \mbox{\hyperlink{structtail}{tail}},\ player)\ !=\ -\/1)\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ aggiorno\ la\ posizione,\ se\ la\ coda\ non\ è\ presente,\ verrà\ visualizzato\ un\ .\ come\ traccia\ del\ percorso\ fatto}}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]][player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]]\ =\ \textcolor{charliteral}{'.'};}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]][player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]-\/1]\ =\ \textcolor{charliteral}{'o'};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]\ =\ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]-\/1;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (direction\ ==\ player-\/>down)\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]+1\ >=\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_af7e92c96b211b09c13aa3c71a6d52039}{rows}})\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ next\_position\ =\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]+1][player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]];}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ next\_coordinates[0]\ =\ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]+1;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ next\_coordinates[1]\ =\ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1];}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{movement_8h_ace2edc9e40d1e165593e1afc57bec481}{validate\_move}}(next\_position,\ next\_coordinates,\ \mbox{\hyperlink{structtail}{tail}},\ player)\ !=\ -\/1)\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]][player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]]\ =\ \textcolor{charliteral}{'.'};}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]+1][player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]]\ =\ \textcolor{charliteral}{'o'};}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]\ =\ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]+1;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (direction\ ==\ player-\/>up)\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]-\/1\ <\ 0)\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ next\_position\ =\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]-\/1][player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]];}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ next\_coordinates[0]\ =\ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]-\/1;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ next\_coordinates[1]\ =\ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1];}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{movement_8h_ace2edc9e40d1e165593e1afc57bec481}{validate\_move}}(next\_position,\ next\_coordinates,\ \mbox{\hyperlink{structtail}{tail}},\ player)\ !=\ -\/1)\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]][player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]]\ =\ \textcolor{charliteral}{'.'};}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]-\/1][player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]]\ =\ \textcolor{charliteral}{'o'};}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]\ =\ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]-\/1;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (direction\ ==\ player-\/>\mbox{\hyperlink{structlabyrinth__player_a7898797fd885dad0cc6428027a6ecc61}{right}})\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]+1\ >=\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_acd9ba88637962f2deefcad4a92792719}{columns}})\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ next\_position\ =\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]][player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]+1];}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ next\_coordinates[0]\ =\ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0];}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ next\_coordinates[1]\ =\ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]+1;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{movement_8h_ace2edc9e40d1e165593e1afc57bec481}{validate\_move}}(next\_position,\ next\_coordinates,\ \mbox{\hyperlink{structtail}{tail}},\ player)\ !=\ -\/1)\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]][player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]]\ =\ \textcolor{charliteral}{'.'};}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]][player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]+1]\ =\ \textcolor{charliteral}{'o'};}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]\ =\ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]+1;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00073\ \ \ \ \ \}}
+\DoxyCodeLine{00074\ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00077\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{movement_8h_a4ed7cd45b33b993162b1fdc2e276fde0}{move\_tail}}(\mbox{\hyperlink{structtail}{list}}\ **\mbox{\hyperlink{structtail}{tail}},\ \textcolor{keywordtype}{int}\ rows,\ \textcolor{keywordtype}{int}\ columns)\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordflow}{if}\ (*\mbox{\hyperlink{structtail}{tail}}\ ==\ NULL)\ \{\ \textcolor{comment}{//\ se\ la\ coda\ non\ esiste}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00080\ \ \ \ \ \}}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{if}\ (((*tail)-\/>next)\ ==\ NULL)\ \{\ \textcolor{comment}{//\ se\ è\ l'ultimo\ nodo\ della\ coda\ copio\ l'ultima\ posizione\ del\ giocatore\ prima\ di\ fare\ la\ mossa}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ (*tail)-\/>rows\ =\ rows;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ (*tail)-\/>columns\ =\ columns;}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ \ \ \ \ (*tail)-\/>rows\ =\ ((*tail)-\/>next)-\/>rows;}
+\DoxyCodeLine{00087\ \ \ \ \ (*tail)-\/>columns\ =\ ((*tail)-\/>next)-\/>columns;}
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{movement_8h_a4ed7cd45b33b993162b1fdc2e276fde0}{move\_tail}}(\&(*tail)-\/>next,\ rows,\ columns);}
+\DoxyCodeLine{00089\ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00101\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{movement_8h_ace2edc9e40d1e165593e1afc57bec481}{validate\_move}}\ (\textcolor{keywordtype}{char}\ next\_position,\ \textcolor{keywordtype}{int}\ *next\_coordinates,\ \mbox{\hyperlink{structtail}{list}}\ **\mbox{\hyperlink{structtail}{tail}},\ \mbox{\hyperlink{structlabyrinth__player}{labyrinth\_player}}\ *player)\ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{int}\ scored\ =\ 0;}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordflow}{if}\ (next\_position\ !=\ \textcolor{charliteral}{'\#'}\ ||\ (next\_position\ ==\ \textcolor{charliteral}{'\#'}\ \&\&\ player-\/>\mbox{\hyperlink{structlabyrinth__player_af8bec2f5fd9603bd0b74e8aeadd69fd1}{drill}}\ >\ 0))\ \{\ \textcolor{comment}{//\ se\ la\ prossima\ cella\ non\ è\ un\ muro\ valuto\ tutte\ le\ possibili\ opzioni}}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (next\_position\ ==\ \textcolor{charliteral}{'\$'})\ \{\ \textcolor{comment}{//\ punti\ bonus}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{tail_8h_a5c8101c13a68d3a034e087646982ab3b}{list\_append}}(\mbox{\hyperlink{structtail}{tail}},\ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0],\ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]);}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_a7fa474df7f512d9aa6a4b2b2092a728f}{score}}\ +=\ 10;}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ scored\ =\ 1;}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (next\_position\ ==\ \textcolor{charliteral}{'\_'})\ \{\ \textcolor{comment}{//\ ha\ vinto}}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_adedc265b3f810cdc2608fb458f0a17c3}{won}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (next\_position\ ==\ \textcolor{charliteral}{'!'})\ \{\ \textcolor{comment}{//\ punti\ dimezzati}}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ snake\_length\ =\ \mbox{\hyperlink{tail_8h_aea7216e8cd8bca8c3974f44acd87ae7d}{get\_tail\_length}}(*\mbox{\hyperlink{structtail}{tail}})\ ;}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ snake\_length/2;\ i++)\ \{\ \textcolor{comment}{//\ dimezzo\ la\ lunghezza\ della\ coda\ di\ snake}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{tail_8h_a27dcc4a870c8db491e4bf6ce74c3f7ac}{pop}}(\mbox{\hyperlink{structtail}{tail}});}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_a7fa474df7f512d9aa6a4b2b2092a728f}{score}}\ /=\ 2;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scored\ =\ 1;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (next\_position\ ==\ \textcolor{charliteral}{'x'})\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ index\ =\ \mbox{\hyperlink{tail_8h_acc71fd5c58dd971fb24e275230be8682}{get\_node\_index}}(*\mbox{\hyperlink{structtail}{tail}},\ next\_coordinates[0],\ next\_coordinates[1]);}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ index;\ i++)\ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{tail_8h_a27dcc4a870c8db491e4bf6ce74c3f7ac}{pop}}(\mbox{\hyperlink{structtail}{tail}});}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_a7fa474df7f512d9aa6a4b2b2092a728f}{score}}\ -\/=\ 10;}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scored\ =\ 1;}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (next\_position\ ==\ \textcolor{charliteral}{'T'})\ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_af8bec2f5fd9603bd0b74e8aeadd69fd1}{drill}}\ +=\ 3;}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (next\_position\ ==\ \textcolor{charliteral}{'\#'})\ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_af8bec2f5fd9603bd0b74e8aeadd69fd1}{drill}}-\/-\/;}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (scored\ !=\ 1)\ \{}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_a7fa474df7f512d9aa6a4b2b2092a728f}{score}}-\/-\/;}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{movement_8h_a4ed7cd45b33b993162b1fdc2e276fde0}{move\_tail}}(\mbox{\hyperlink{structtail}{tail}},\ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0],\ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]);}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00140\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00142\ \ \ \ \ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordflow}{return}\ scored;}
+\DoxyCodeLine{00145\ \}}
+\DoxyCodeLine{00146\ }
+
+\end{DoxyCode}

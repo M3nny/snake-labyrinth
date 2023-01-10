@@ -1,0 +1,193 @@
+\hypertarget{game__manager_8h_source}{}\doxysection{game\+\_\+manager.\+h}
+\label{game__manager_8h_source}\index{/Users/M3nny/Documents/GitHub/snake-\/labyrinth/src/game\_manager.h@{/Users/M3nny/Documents/GitHub/snake-\/labyrinth/src/game\_manager.h}}
+\mbox{\hyperlink{game__manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keywordtype}{char}\ **\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}};\ }
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth__stage_af7e92c96b211b09c13aa3c71a6d52039}{rows}};\ }
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth__stage_acd9ba88637962f2deefcad4a92792719}{columns}};\ }
+\DoxyCodeLine{00011\ \}\ \mbox{\hyperlink{structlabyrinth__stage}{labyrinth\_stage}};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{int}\ position[2];\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structlabyrinth__player_adedc265b3f810cdc2608fb458f0a17c3}{won}};\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{structlabyrinth__player_a1add0736c6d9b79516716679dff2dfaa}{moves\_storage}};\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth__player_abc3b49a762d402d7d7fb30d9296cd8c8}{moves\_counter}};\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth__player_a7fa474df7f512d9aa6a4b2b2092a728f}{score}};\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{char}\ left,\ up,\ down,\ \mbox{\hyperlink{structlabyrinth__player_a7898797fd885dad0cc6428027a6ecc61}{right}};\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth__player_af8bec2f5fd9603bd0b74e8aeadd69fd1}{drill}};\ }
+\DoxyCodeLine{00022\ \}\ \mbox{\hyperlink{structlabyrinth__player}{labyrinth\_player}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00025\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{game__manager_8h_ab54afb3d51faeb1886f046ba7d0945eb}{show\_tail}}(\mbox{\hyperlink{structtail}{list}}\ *\mbox{\hyperlink{structtail}{tail}},\ \mbox{\hyperlink{structlabyrinth__stage}{labyrinth\_stage}}\ *stage)\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{structtail}{tail}}\ ==\ NULL)\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00028\ \ \ \ \ \}}
+\DoxyCodeLine{00029\ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[\mbox{\hyperlink{structtail}{tail}}-\/>\mbox{\hyperlink{structtail_a7a8a4b4320b630f3ef3205ab93cebcf1}{rows}}][\mbox{\hyperlink{structtail}{tail}}-\/>\mbox{\hyperlink{structtail_a89b8b2ddd85b000014eb779d05b5376e}{columns}}]\ =\ \textcolor{charliteral}{'x'};}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{game__manager_8h_ab54afb3d51faeb1886f046ba7d0945eb}{show\_tail}}(\mbox{\hyperlink{structtail}{tail}}-\/>\mbox{\hyperlink{structtail_a190818b0b87effe62ca4e6600161ff3b}{next}},\ stage);}
+\DoxyCodeLine{00031\ \}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00034\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{game__manager_8h_a521552c779511e9c4ff507823a81f8b2}{delete\_old\_tail}}(\mbox{\hyperlink{structlabyrinth__stage}{labyrinth\_stage}}\ *stage)\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_af7e92c96b211b09c13aa3c71a6d52039}{rows}};\ i++)\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_acd9ba88637962f2deefcad4a92792719}{columns}};\ j++)\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[i][j]\ ==\ \textcolor{charliteral}{'x'})\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[i][j]\ =\ \textcolor{charliteral}{'\ '};}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \}}
+\DoxyCodeLine{00042\ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{game__manager_8h_a4b1e5030a5093d1c6eadc9a062c5c434}{show\_stages}}(\textcolor{keywordtype}{bool}\ loaded,\ \mbox{\hyperlink{structtail}{list}}\ *\mbox{\hyperlink{structtail}{tail}},\ \mbox{\hyperlink{structlabyrinth__stage}{labyrinth\_stage}}\ *stage)\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{if}\ (!loaded)\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ FILE*\ file\ =\ fopen(\textcolor{stringliteral}{"{}labyrinths/labyrinths.txt"{}},\ \textcolor{stringliteral}{"{}r"{}});}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!file)\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n\ Unable\ to\ open\ file"{}});}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ line[50];}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (fgets(line,\ \textcolor{keyword}{sizeof}(line),\ file))\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%s"{}},\ line);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ fclose(file);}
+\DoxyCodeLine{00064\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{game__manager_8h_a521552c779511e9c4ff507823a81f8b2}{delete\_old\_tail}}(stage);}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{game__manager_8h_ab54afb3d51faeb1886f046ba7d0945eb}{show\_tail}}(\mbox{\hyperlink{structtail}{tail}},\ stage);}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_af7e92c96b211b09c13aa3c71a6d52039}{rows}};\ i++)\ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_acd9ba88637962f2deefcad4a92792719}{columns}};\ j++)\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\%c"{}},\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[i][j]);}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00073\ \ \ \ \ \}}
+\DoxyCodeLine{00074\ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00082\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{game__manager_8h_ac262d714e151bcb092824bc156ba5284}{load\_game}}(\textcolor{keywordtype}{char}\ *stage\_no,\ \mbox{\hyperlink{structlabyrinth__stage}{labyrinth\_stage}}\ *stage,\ \mbox{\hyperlink{structlabyrinth__player}{labyrinth\_player}}\ *player)\ \{}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_adedc265b3f810cdc2608fb458f0a17c3}{won}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00085\ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_a7fa474df7f512d9aa6a4b2b2092a728f}{score}}\ =\ 1000;}
+\DoxyCodeLine{00086\ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_af8bec2f5fd9603bd0b74e8aeadd69fd1}{drill}}\ =\ 0;}
+\DoxyCodeLine{00087\ \ \ \ \ player-\/>left\ =\ \textcolor{charliteral}{'h'};}
+\DoxyCodeLine{00088\ \ \ \ \ player-\/>up\ =\ \textcolor{charliteral}{'k'};}
+\DoxyCodeLine{00089\ \ \ \ \ player-\/>down\ =\ \textcolor{charliteral}{'j'};}
+\DoxyCodeLine{00090\ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_a7898797fd885dad0cc6428027a6ecc61}{right}}\ =\ \textcolor{charliteral}{'l'};}
+\DoxyCodeLine{00091\ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_a1add0736c6d9b79516716679dff2dfaa}{moves\_storage}}\ =\ malloc(\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char})\ *\ 1);}
+\DoxyCodeLine{00092\ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_abc3b49a762d402d7d7fb30d9296cd8c8}{moves\_counter}}\ =\ 0;}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordflow}{if}\ (stage\_no[0]\ !=\ \textcolor{charliteral}{'0'})\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ line[50];}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ rows\ =\ 0,\ columns\ =\ 0;\ \textcolor{comment}{//\ numero\ di\ righe\ e\ colonne}}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ c;}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ FILE*\ file\ =\ fopen(\textcolor{stringliteral}{"{}labyrinths/labyrinths.txt"{}},\ \textcolor{stringliteral}{"{}r"{}});}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!file)\ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n\ Unable\ to\ open\ file"{}});}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (fgets(line,\ \textcolor{keyword}{sizeof}(line),\ file))\ \{\ \textcolor{comment}{//\ leggo\ tutto\ il\ file\ e\ stoppo\ il\ ciclo\ dopo\ aver\ letto\ il\ labirinto}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((strcmp(line,\ stage\_no))\ ==\ 0)\ \{\ \textcolor{comment}{//\ se\ trovo\ il\ numero\ corrispondente\ al\ labirinto\ comincio\ a\ leggerlo}}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (fgets(line,\ \textcolor{keyword}{sizeof}(line),\ file))\ \{\ \textcolor{comment}{//\ leggo\ il\ labirinto\ finchè\ non\ trovo\ end}}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((strcmp(line,\ \textcolor{stringliteral}{"{}end\(\backslash\)n"{}}))\ ==\ 0)\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ columns\ =\ strlen(line)\ -\/\ 1;}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rows++;}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_af7e92c96b211b09c13aa3c71a6d52039}{rows}}\ =\ rows;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_acd9ba88637962f2deefcad4a92792719}{columns}}\ =\ columns;}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ridimensiono\ la\ matrice\ in\ base\ al\ labirinto\ selezionato}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}\ =\ malloc(\ \textcolor{keyword}{sizeof}\ *stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}\ *\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_af7e92c96b211b09c13aa3c71a6d52039}{rows}});}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}})\ \{\ \textcolor{comment}{//\ controllo\ se\ il\ malloc\ è\ riuscito}}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\ \textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_af7e92c96b211b09c13aa3c71a6d52039}{rows}};\ i++\ )\ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[i]\ =\ malloc(\ \textcolor{keyword}{sizeof}\ *stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[i]\ *\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_acd9ba88637962f2deefcad4a92792719}{columns}});}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Caricamento\ del\ livello\ non\ riuscito\(\backslash\)n"{}});}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ rimando\ all'inizio\ il\ puntatore\ del\ file}}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ poi\ con\ un'operazione\ analoga\ alla\ precedente,\ metto\ dentro\ alla\ matrice\ il\ livello\ selezionato}}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ rewind(file);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (fgets(line,\ \textcolor{keyword}{sizeof}(line),\ file))\ \{\ \textcolor{comment}{//\ leggo\ tutto\ il\ file\ e\ stoppo\ il\ ciclo\ dopo\ aver\ letto\ il\ labirinto}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((strcmp(line,\ stage\_no))\ ==\ 0)\ \{\ \textcolor{comment}{//\ se\ trovo\ il\ numero\ corrispondente\ al\ labirinto\ comincio\ a\ leggerlo}}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ metto\ dentro\ alla\ matrice\ tutti\ gli\ elementi}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_af7e92c96b211b09c13aa3c71a6d52039}{rows}};\ i++)\ \{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_acd9ba88637962f2deefcad4a92792719}{columns}};\ j++)\ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c\ =\ fgetc(file);}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[i][j]\ =\ c;}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (c\ ==\ \textcolor{charliteral}{'o'})\ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]\ =\ i;}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]\ =\ j;}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (c\ ==\ \textcolor{charliteral}{'\(\backslash\)n'});}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00155\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ scanf(\textcolor{stringliteral}{"{}\%d"{}},\ \&stage-\/>\mbox{\hyperlink{structlabyrinth__stage_acd9ba88637962f2deefcad4a92792719}{columns}});}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ scanf(\textcolor{stringliteral}{"{}\%d"{}},\ \&stage-\/>\mbox{\hyperlink{structlabyrinth__stage_af7e92c96b211b09c13aa3c71a6d52039}{rows}});}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ input[stage-\/>\mbox{\hyperlink{structlabyrinth__stage_af7e92c96b211b09c13aa3c71a6d52039}{rows}}];}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}\ =\ malloc(\ \textcolor{keyword}{sizeof}\ *stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}\ *\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_af7e92c96b211b09c13aa3c71a6d52039}{rows}});}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}})\ \{\ \textcolor{comment}{//\ controllo\ se\ il\ malloc\ è\ riuscito}}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\ \textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_af7e92c96b211b09c13aa3c71a6d52039}{rows}};\ i++\ )\ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[i]\ =\ malloc(\ \textcolor{keyword}{sizeof}\ *stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[i]\ *\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_acd9ba88637962f2deefcad4a92792719}{columns}});}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Caricamento\ del\ livello\ non\ riuscito\(\backslash\)n"{}});}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_af7e92c96b211b09c13aa3c71a6d52039}{rows}};\ i++)\ \{}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ scanf(\textcolor{stringliteral}{"{}\ \%[\string^\(\backslash\)n]\%*c"{}},\ input);}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_acd9ba88637962f2deefcad4a92792719}{columns}};\ j++)\ \{}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (input[j]\ ==\ \textcolor{charliteral}{'o'})\ \{}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[0]\ =\ i;}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_a840f27e20ca89a2c262535ba7975030b}{position}}[1]\ =\ j;}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[i][j]\ =\ input[j];}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00179\ \ \ \ \ \}}
+\DoxyCodeLine{00180\ \}}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00183\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{game__manager_8h_a6570cf68c53df208850d167f33630397}{store\_move}}(\textcolor{keywordtype}{char}\ direction,\ \mbox{\hyperlink{structlabyrinth__player}{labyrinth\_player}}\ *player)\ \{}
+\DoxyCodeLine{00184\ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_a1add0736c6d9b79516716679dff2dfaa}{moves\_storage}}[player-\/>\mbox{\hyperlink{structlabyrinth__player_abc3b49a762d402d7d7fb30d9296cd8c8}{moves\_counter}}]\ =\ direction;}
+\DoxyCodeLine{00185\ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_abc3b49a762d402d7d7fb30d9296cd8c8}{moves\_counter}}++;}
+\DoxyCodeLine{00186\ \ \ \ \ player-\/>\mbox{\hyperlink{structlabyrinth__player_a1add0736c6d9b79516716679dff2dfaa}{moves\_storage}}\ =\ realloc(player-\/>\mbox{\hyperlink{structlabyrinth__player_a1add0736c6d9b79516716679dff2dfaa}{moves\_storage}},\ (player-\/>\mbox{\hyperlink{structlabyrinth__player_abc3b49a762d402d7d7fb30d9296cd8c8}{moves\_counter}}\ +\ 1)\ *\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
+\DoxyCodeLine{00187\ \}}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00190\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{game__manager_8h_aad2fdf88f4a4334f2acd95907be6180b}{free\_game}}(\mbox{\hyperlink{structlabyrinth__stage}{labyrinth\_stage}}\ *stage,\ \mbox{\hyperlink{structlabyrinth__player}{labyrinth\_player}}\ *player,\ \mbox{\hyperlink{structtail}{list}}\ *\mbox{\hyperlink{structtail}{tail}})\ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ stage-\/>\mbox{\hyperlink{structlabyrinth__stage_af7e92c96b211b09c13aa3c71a6d52039}{rows}};\ i++\ )\ \{}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ free(stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}}[i]);}
+\DoxyCodeLine{00193\ \ \ \ \ \}}
+\DoxyCodeLine{00194\ \ \ \ \ free(stage-\/>\mbox{\hyperlink{structlabyrinth__stage_a8325a4e83af0a1bbf1fa5115ad5e7bd9}{playground}});}
+\DoxyCodeLine{00195\ \ \ \ \ free(player-\/>\mbox{\hyperlink{structlabyrinth__player_a1add0736c6d9b79516716679dff2dfaa}{moves\_storage}});}
+\DoxyCodeLine{00196\ \ \ \ \ \mbox{\hyperlink{tail_8h_a43046532dafc269b51807dd7ec5ad208}{delete\_tail}}(\mbox{\hyperlink{structtail}{tail}});}
+\DoxyCodeLine{00197\ \}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00203\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{game__manager_8h_ac8bb3912a3ce86b15842e79d0b421204}{clear}}\ ()\ \{}
+\DoxyCodeLine{00204\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ \_WIN32}}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ system(\textcolor{stringliteral}{"{}cls"{}});}
+\DoxyCodeLine{00206\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ system(\textcolor{stringliteral}{"{}clear"{}});}
+\DoxyCodeLine{00208\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00209\ \}}
+
+\end{DoxyCode}

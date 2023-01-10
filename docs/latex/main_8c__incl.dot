@@ -1,0 +1,28 @@
+digraph "/Users/M3nny/Documents/GitHub/snake-labyrinth/src/main.c"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="/Users/M3nny/Documents\l/GitHub/snake-labyrinth\l/src/main.c",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="File principale."];
+  Node1 -> Node2 [color="steelblue1",style="solid"];
+  Node2 [label="stdio.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node1 -> Node3 [color="steelblue1",style="solid"];
+  Node3 [label="unistd.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node1 -> Node4 [color="steelblue1",style="solid"];
+  Node4 [label="stdlib.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node1 -> Node5 [color="steelblue1",style="solid"];
+  Node5 [label="string.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node1 -> Node6 [color="steelblue1",style="solid"];
+  Node6 [label="stdbool.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node1 -> Node7 [color="steelblue1",style="solid"];
+  Node7 [label="time.h",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node1 -> Node8 [color="steelblue1",style="solid"];
+  Node8 [label="tail.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$tail_8h.html",tooltip="Gestione della coda di snake."];
+  Node1 -> Node9 [color="steelblue1",style="solid"];
+  Node9 [label="game_manager.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$game__manager_8h.html",tooltip="Logica del gioco."];
+  Node1 -> Node10 [color="steelblue1",style="solid"];
+  Node10 [label="movement.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$movement_8h.html",tooltip="Movimento di snake."];
+  Node1 -> Node11 [color="steelblue1",style="solid"];
+  Node11 [label="challenges.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$challenges_8h.html",tooltip="Contiene l'algoritmo usato per la soluzione delle challenge."];
+}

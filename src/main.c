@@ -14,7 +14,7 @@
 #include "challenges.h"
 
 /**
- * 1. Se non è presente --challegne come parametro, faccio scegliere la modalità interattiva/random all'utente
+ * 1. Se non è presente --challenge come parametro, faccio scegliere la modalità interattiva/random all'utente
  * 2. Viene chiesto come si vuole selezionare il livello: input da tastiera specificando righe e colonne del livello, oppure un livello già esistente sul file labyrinth.txt
  * 3. Viene caricata la matrice in memoria e si comincia a giocare
  * 4. Dopo ogni mossa l'interfaccia del terminale viene pulita

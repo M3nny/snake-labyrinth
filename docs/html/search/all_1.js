@@ -1,0 +1,7 @@
+var searchData=
+[
+  ['challenge_0',['challenge',['../challenges_8h.html#a0096245d65985209605a96493b6f5a46',1,'challenges.h']]],
+  ['challenges_2eh_1',['challenges.h',['../challenges_8h.html',1,'']]],
+  ['clear_2',['clear',['../game__manager_8h.html#ac8bb3912a3ce86b15842e79d0b421204',1,'game_manager.h']]],
+  ['columns_3',['columns',['../structlabyrinth__stage.html#acd9ba88637962f2deefcad4a92792719',1,'labyrinth_stage::columns()'],['../structtail.html#a89b8b2ddd85b000014eb779d05b5376e',1,'tail::columns()']]]
+];

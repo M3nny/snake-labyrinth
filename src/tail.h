@@ -74,8 +74,9 @@ int get_node_index(list *l, int rows, int columns) {
 
 /// Libera la memoria allocata dalla linked list, viene chiamata da free_game prima di finire il programma
 void delete_tail(list *l) {
+    list *temp; 
     while (l != NULL) {
-        list *temp = l; 
+        temp = l;
         l = l->next;
         free(temp);
     }

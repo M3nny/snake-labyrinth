@@ -1,0 +1,76 @@
+\hypertarget{game__manager_8h}{}\doxysection{/\+Users/\+M3nny/\+Documents/\+Git\+Hub/snake-\/labyrinth/src/game\+\_\+manager.h File Reference}
+\label{game__manager_8h}\index{/Users/M3nny/Documents/GitHub/snake-\/labyrinth/src/game\_manager.h@{/Users/M3nny/Documents/GitHub/snake-\/labyrinth/src/game\_manager.h}}
+
+
+Logica del gioco.  
+
+
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structlabyrinth__stage}{labyrinth\+\_\+stage}}
+\begin{DoxyCompactList}\small\item\em Contiene la matrice su cui si svolge il gioco e la sua grandezza. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structlabyrinth__player}{labyrinth\+\_\+player}}
+\begin{DoxyCompactList}\small\item\em Contiene tutti i valori attuali del giocatore. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{game__manager_8h_ab54afb3d51faeb1886f046ba7d0945eb}\label{game__manager_8h_ab54afb3d51faeb1886f046ba7d0945eb}} 
+void {\bfseries show\+\_\+tail} (\mbox{\hyperlink{tail_8h_ac1333894ccaeb6da94d2674c0a70d6a4}{list}} $\ast$\mbox{\hyperlink{structtail}{tail}}, \mbox{\hyperlink{structlabyrinth__stage}{labyrinth\+\_\+stage}} $\ast$stage)
+\begin{DoxyCompactList}\small\item\em Per ogni elemento della coda, mette il simbolo x nella matrice di gioco. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{game__manager_8h_a521552c779511e9c4ff507823a81f8b2}\label{game__manager_8h_a521552c779511e9c4ff507823a81f8b2}} 
+void {\bfseries delete\+\_\+old\+\_\+tail} (\mbox{\hyperlink{structlabyrinth__stage}{labyrinth\+\_\+stage}} $\ast$stage)
+\begin{DoxyCompactList}\small\item\em Cancella la coda (all\textquotesingle{}occhio dell\textquotesingle{}utente) dalla matrice. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game__manager_8h_a4b1e5030a5093d1c6eadc9a062c5c434}{show\+\_\+stages}} (bool loaded, \mbox{\hyperlink{tail_8h_ac1333894ccaeb6da94d2674c0a70d6a4}{list}} $\ast$\mbox{\hyperlink{structtail}{tail}}, \mbox{\hyperlink{structlabyrinth__stage}{labyrinth\+\_\+stage}} $\ast$stage)
+\begin{DoxyCompactList}\small\item\em Stampa la matrice di gioco. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game__manager_8h_ac262d714e151bcb092824bc156ba5284}{load\+\_\+game}} (char $\ast$stage\+\_\+no, \mbox{\hyperlink{structlabyrinth__stage}{labyrinth\+\_\+stage}} $\ast$stage, \mbox{\hyperlink{structlabyrinth__player}{labyrinth\+\_\+player}} $\ast$player)
+\begin{DoxyCompactList}\small\item\em Carica in memoria la matrice di gioco e inizializza i valori della struct \mbox{\hyperlink{structlabyrinth__player}{labyrinth\+\_\+player}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{game__manager_8h_a6570cf68c53df208850d167f33630397}\label{game__manager_8h_a6570cf68c53df208850d167f33630397}} 
+void {\bfseries store\+\_\+move} (char direction, \mbox{\hyperlink{structlabyrinth__player}{labyrinth\+\_\+player}} $\ast$player)
+\begin{DoxyCompactList}\small\item\em Inserisce dentro a moves\+\_\+storage la mossa passata come parametro. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{game__manager_8h_aad2fdf88f4a4334f2acd95907be6180b}\label{game__manager_8h_aad2fdf88f4a4334f2acd95907be6180b}} 
+void {\bfseries free\+\_\+game} (\mbox{\hyperlink{structlabyrinth__stage}{labyrinth\+\_\+stage}} $\ast$stage, \mbox{\hyperlink{structlabyrinth__player}{labyrinth\+\_\+player}} $\ast$player, \mbox{\hyperlink{tail_8h_ac1333894ccaeb6da94d2674c0a70d6a4}{list}} $\ast$\mbox{\hyperlink{structtail}{tail}})
+\begin{DoxyCompactList}\small\item\em Dealloca dalla memoria la matrice di gioco e gli altri dati precedentementi allocati prima di finire l\textquotesingle{}esecuzione del programma. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game__manager_8h_ac8bb3912a3ce86b15842e79d0b421204}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Pulisco l\textquotesingle{}interfaccia del terminale. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Logica del gioco. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{game__manager_8h_ac8bb3912a3ce86b15842e79d0b421204}\label{game__manager_8h_ac8bb3912a3ce86b15842e79d0b421204}} 
+\index{game\_manager.h@{game\_manager.h}!clear@{clear}}
+\index{clear@{clear}!game\_manager.h@{game\_manager.h}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Pulisco l\textquotesingle{}interfaccia del terminale. 
+
+se l\textquotesingle{}OS è unix like, verrà usato il comando clear, altrimenti viene usato cls per windows \mbox{\Hypertarget{game__manager_8h_ac262d714e151bcb092824bc156ba5284}\label{game__manager_8h_ac262d714e151bcb092824bc156ba5284}} 
+\index{game\_manager.h@{game\_manager.h}!load\_game@{load\_game}}
+\index{load\_game@{load\_game}!game\_manager.h@{game\_manager.h}}
+\doxysubsubsection{\texorpdfstring{load\_game()}{load\_game()}}
+{\footnotesize\ttfamily void load\+\_\+game (\begin{DoxyParamCaption}\item[{char $\ast$}]{stage\+\_\+no,  }\item[{\mbox{\hyperlink{structlabyrinth__stage}{labyrinth\+\_\+stage}} $\ast$}]{stage,  }\item[{\mbox{\hyperlink{structlabyrinth__player}{labyrinth\+\_\+player}} $\ast$}]{player }\end{DoxyParamCaption})}
+
+
+
+Carica in memoria la matrice di gioco e inizializza i valori della struct \mbox{\hyperlink{structlabyrinth__player}{labyrinth\+\_\+player}}. 
+
+la matrice può essere caricata in due modi\+: inserendola manualmente oppure caricandola dal file contenente alcuni livelli già fatti \mbox{\Hypertarget{game__manager_8h_a4b1e5030a5093d1c6eadc9a062c5c434}\label{game__manager_8h_a4b1e5030a5093d1c6eadc9a062c5c434}} 
+\index{game\_manager.h@{game\_manager.h}!show\_stages@{show\_stages}}
+\index{show\_stages@{show\_stages}!game\_manager.h@{game\_manager.h}}
+\doxysubsubsection{\texorpdfstring{show\_stages()}{show\_stages()}}
+{\footnotesize\ttfamily void show\+\_\+stages (\begin{DoxyParamCaption}\item[{bool}]{loaded,  }\item[{\mbox{\hyperlink{tail_8h_ac1333894ccaeb6da94d2674c0a70d6a4}{list}} $\ast$}]{tail,  }\item[{\mbox{\hyperlink{structlabyrinth__stage}{labyrinth\+\_\+stage}} $\ast$}]{stage }\end{DoxyParamCaption})}
+
+
+
+Stampa la matrice di gioco. 
+
+se il livello deve ancora essere selezionato stampo tutto il file contenente i livelli, altrimenti stampo il livello caricato in memoria 
