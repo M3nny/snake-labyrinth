@@ -84,10 +84,10 @@ void load_game(char *stage_no, labyrinth_stage *stage, labyrinth_player *player)
     player->won = false;
     player->score = 1000;
     player->drill = 0;
-    player->left = 'h';
-    player->up = 'k';
-    player->down = 'j';
-    player->right = 'l';
+    player->left = 'O';
+    player->up = 'N';
+    player->down = 'S';
+    player->right = 'E';
     player->moves_storage = malloc(sizeof(char) * 1);
     player->moves_counter = 0;
 

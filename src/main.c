@@ -92,13 +92,13 @@ int main(int argc, char **argv) {
                         break;
                 }
             }
-            move(direction, &tail, &stage, &player);
-            store_move(direction, &player);
-            clear();
-            show_stages(true, tail, &stage);
-
-            printf("Punteggio: %d\n", player.score);
         } while (direction != player.left && direction != player.down && direction != player.up && direction != player.right);
+        move(direction, &tail, &stage, &player);
+        store_move(direction, &player);
+        clear();
+        show_stages(true, tail, &stage);
+
+        printf("Punteggio: %d\n", player.score);
     } while (!player.won);
     printf("Hai vinto!\nDesideri vedere le mosse eseguite?(s/n) ");
 
