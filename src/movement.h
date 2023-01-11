@@ -143,4 +143,3 @@ int validate_move (char next_position, int *next_coordinates, list **tail, labyr
 
     return scored;
 }
-

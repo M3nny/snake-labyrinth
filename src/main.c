@@ -36,7 +36,8 @@ int main(int argc, char **argv) {
     int mode, method; // mode: selezione modalità, method: selezione metodo di input del livello
     char direction, show_moves; // direction: direzione impartita dal giocatore, show_moves: per decidere se mostrare le mosse eseguite a fine partita 
     srand(time(NULL)); // do un seme casuale al random
-
+    
+    clear();
     printf("Benvenuto su snake labyrinth\n");
 
     do { // scelgo la mdalità
@@ -44,12 +45,14 @@ int main(int argc, char **argv) {
         printf("(input modalità): ");
         scanf("%d", &mode);
     } while (mode != 1 && mode != 2);
+    clear();
 
     do { // scelgo il metodo di input della mappa
-        printf("Come vuoi selezionare il livello:\n1 - Manuale\n2 - livelli già esistenti\n");
+        printf("Come vuoi selezionare il livello:\n1 - Manuale\n2 - Livelli già esistenti\n");
         printf("(input metodo): ");
         scanf("%d", &method);
     } while (method != 1 && method != 2);
+    clear();
 
     if (method == 1) {
         selected_stage[0] = '0';

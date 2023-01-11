@@ -196,9 +196,9 @@ void free_game(labyrinth_stage *stage, labyrinth_player *player, list *tail) {
     delete_tail(tail);
 }
 
-/// Pulisco l'interfaccia del terminale
+/// Pulisce l'interfaccia del terminale
 /**
- * se l'OS è unix like, verrà usato il comando clear, altrimenti viene usato cls per windows
+ * se l'OS è unix like, verrà usato il comando clear, altrimenti verrà usato cls per windows
 */
 void clear () {
     #ifdef _WIN32

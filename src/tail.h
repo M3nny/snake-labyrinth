@@ -51,9 +51,8 @@ void print_list(list *l) {
 /// Ottiene quanti elementi sono presenti nella linked list
 int get_tail_length(list *l) {
     int count = 0;
-    list *current = l;
-    while (current != NULL) {
-        current = current->next;
+    while (l != NULL) {
+        l = l->next;
         count++;
     }
     return count;
@@ -62,12 +61,11 @@ int get_tail_length(list *l) {
 /// Ritorna la posizione dell'elemento della lista che possiede i valori passati come parametri alla funzione
 int get_node_index(list *l, int rows, int columns) {
     int count = 0;
-    list *current = l;
-    while (current != NULL) {
-        if (current->rows == rows && current->columns == columns) {
+    while (l != NULL) {
+        if (l->rows == rows && l->columns == columns) {
             return count;
         }
-        current = current->next;
+        l = l->next;
         count++;
     }
     return count;
