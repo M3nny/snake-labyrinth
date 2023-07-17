@@ -1,5 +1,5 @@
 /**
- * \file movement.h
+ * \file movement.c
  * \brief Movimento di snake
 */
 

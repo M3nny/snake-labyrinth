@@ -1,5 +1,5 @@
 /**
- * \file challenges.h
+ * \file challenges.c
  * \brief Contiene l'algoritmo usato per la soluzione delle challenge
 */
 
@@ -210,56 +210,23 @@ void avoid_wall(char direction, list **tail, labyrinth_stage *stage_AI, labyrint
  * 5. Quando mi sono allineato vado dritto verso l'uscita (evitando i muri)
  * 6. Libero la memoria allocata
 */
-void challenge() {
-    // inizializzo/dichiaro tutto il necessario
-    labyrinth_stage stage_AI;
-    labyrinth_player bot;
-    list *tail = NULL;
-
-    // inizializzo i campi all'interno della struct
-    bot.won = false;
-    bot.score = 1000;
-    bot.drill = 0;
-    bot.left = 'O';
-    bot.down = 'S';
-    bot.up = 'N';
-    bot.right = 'E';
-    bot.moves_storage = malloc(sizeof(char) * 1);
-    bot.moves_counter = 0;
-
-    scanf("%d", &stage_AI.columns);
-    scanf("%d", &stage_AI.rows);
-    char input[stage_AI.rows];
+void bot_algorithm(list *tail, labyrinth_stage stage_AI, labyrinth_player bot) {
     int gate[2];
     bool aligned = false;
 
-    // creo la matrice
-    stage_AI.playground = malloc( sizeof *stage_AI.playground * stage_AI.rows);
-    if (stage_AI.playground) { // controllo se il malloc è riuscito
-        for ( size_t i = 0; i < stage_AI.rows; i++ ) {
-            stage_AI.playground[i] = malloc( sizeof *stage_AI.playground[i] * stage_AI.columns);
-        }
-    } else {
-        printf("Caricamento del livello non riuscito\n");
-        exit(EXIT_FAILURE);
-    }
-
-    // riempio la matrice e trovo il punto di partenza
     for (int i = 0; i < stage_AI.rows; i++) {
-        scanf(" %[^\n]%*c", input);
         for (int j = 0; j < stage_AI.columns; j++) {
-            if (input[j] == 'o') {
+            if (stage_AI.playground[i][j] == 'o') {
                 bot.position[0] = i;
                 bot.position[1] = j;
-            } else if (input[j] == '_') {
+            } else if (stage_AI.playground[i][j] == '_') {
                 gate[0] = i;
                 gate[1] = j;
 
             }
-
-            stage_AI.playground[i][j] = input[j];
         }
     }
+
 
     // faccio la prima mossa per uscire dal punto di partenza
     if (bot.position[0] == 0) {
@@ -354,11 +321,11 @@ void challenge() {
     } while (!bot.won);
 
     // stampo le mosse
+    clear();
+    show_stages(true, tail, &stage_AI);
+    printf("Elenco delle mosse eseguite: ");
     for (int i = 0; i < bot.moves_counter; i++) {
-        printf("%c",bot.moves_storage[i]);
+        printf("%c", bot.moves_storage[i]);
     }
     printf("\n");
-
-    // libero la memoria allocata
-    free_game(&stage_AI, &bot, tail);
 }

@@ -1,5 +1,5 @@
 /**
- * \file game_manager.h
+ * \file game_manager.c
  * \brief Logica del gioco
 */
 

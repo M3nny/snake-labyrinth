@@ -1,5 +1,5 @@
 /**
- * \file tail.h
+ * \file tail.c
  * \brief Gestione della coda di snake
 */
 
