@@ -1,6 +1,7 @@
-# Snake maze
+# Snake labyrinth
 
-In this terminal game you can guide Snake to the exit of the maze manually, randomly or by using an algorithm that avoids walls.
+In this terminal game you can guide Snake to the exit of the maze manually, randomly or by using an algorithm that avoids walls.\
+It is possible to move the snake with: N(Nord), S(Sud), E(Est), O(Ovest)
 
 Various power-ups/hazards can be found along the maze, such as:
 - **#**: wall.
